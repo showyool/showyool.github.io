@@ -1,170 +1,37 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta http-equiv="content-type" content="text/html; charset=utf-8">
-<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
-<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+{% extends '_layout.swig' %}
+{% import '_macro/post.swig' as post_template %}
+{% import '_macro/sidebar.swig' as sidebar_template %}
 
 
+{% block title %}{{ page.title }} | {{ config.title }}{% endblock %}
+
+{% block page_class %}page-post-detail{% endblock %}
 
 
-    <meta name="keywords" content="Java"/>
+{% block content %}
 
+  <div id="posts" class="posts-expand">
+    {{ post_template.render(page) }}
 
-
-    <meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer ..."/>
-
-
-<meta name="Robots" content="all">
-
-
-    <title>Showyool&#39;s Blog | Hello World</title>
-
-
-<link rel="icon" href="/images/favicon.ico">
-
-<link rel="stylesheet" href="/css/font-awesome.min.css">
-
-
-<link rel="stylesheet" href="/css/atom-one-dark.css">
-
-
-<link rel="stylesheet" href="/css/style.css">
-
-
-<script src="/js/highlight.min.js"></script>
-
-<meta name="generator" content="Hexo 5.2.0"></head>
-<body>
-    <div class="main-container">
-        <header class="header">
-    <div class="global-width">
-        <nav class="nav-box">
-            
-                <a class="nav-item" href="/"
-                
-                >首页</a>
-            
-                <a class="nav-item" href="/resume"
-                
-                >简历</a>
-            
-                <a class="nav-item" href="/mood"
-                
-                   target="_blank"
-                
-                >心情</a>
-            
-                <a class="nav-item" href="/amusement/tetris"
-                
-                   target="_blank"
-                
-                >娱乐</a>
-            
-                <a class="nav-item" href="/about"
-                
-                >不榖</a>
-            
-        </nav>
+    <div class="post-spread">
+      {% if theme.jiathis %}
+        {% include '_partials/share/jiathis.swig' %}
+      {% elseif theme.baidushare %}
+        {% include '_partials/share/baidushare.swig' %}
+      {% elseif theme.add_this_id %}
+        {% include '_partials/share/add-this.swig' %}
+      {% elseif theme.duoshuo_shortname and theme.duoshuo_share %}
+        {% include '_partials/share/duoshuo_share.swig' %}
+      {% endif %}
     </div>
-</header>
-
-        <section class="content global-width">
-            <div class="main">
-                <article class="box post">
-    <div class="post-title align-center detail-title">Hello World</div>
-    <div class="post-meta align-center">
-        
-        <i class="fa fa-calendar"></i> <time>2020-10-22</time>
-        <span class="dotted">|</span>
-        <i class="fa fa-user"></i> 
-        
-    </div>
-
-    <div class="post-content">
-        <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-
-    </div>
-</article>
-            </div>
-            <div class="aside">
-    
-        <div class="box widget">
-    <div class="introduction">
-        <p><img src="/images/avatar.jpg" alt="head-sculpture" /></p>
-        <p class="name">
-            Showyool
-        </p>
-        <p class="slogan">真知灼见出实战</p>
-    </div>
-</div>
-    
-        
-<div class="box widget">
-    <div class="title">最新</div>
-    <ul class="item-box">
-        
-            
-                <li><a href="/2020/10/22/hello-world/">Hello World</a></li>
-            
-        
-            
-                <li><a href="/2020/09/15/%E4%B8%8D%E6%98%AF%E5%90%A7%EF%BC%8C%E8%BF%98%E6%9C%89%E4%BA%BA%E4%B8%8D%E7%9F%A5%E9%81%93%E4%B8%89%E7%9B%AE%E8%BF%90%E7%AE%97%E7%AC%A6%E7%9A%84BUG/">不是吧，还有人不知道三目运算符的BUG</a></li>
-            
-        
-    </ul>
-</div>
-
-    
-        
-    
-        
-  <div class="box widget">
-    <div class="title">归档</div>
-    <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/10/">2020-10</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">2020-09</a><span class="archive-list-count">1</span></li></ul>
   </div>
 
-    
-        
-    <div class="box widget">
-        <div class="title">标签</div>
-        <div class="item-box cloud-label">
-            <a href="/tags/Java/" style="font-size: 10px;">Java</a>
-        </div>
-    </div>
+{% endblock %}
 
-    
-</div>
-        </section>
-        <footer class="footer">
-    <div class="global-width footer-box">
-        <div class="copyright">
-            <span>Copyright &copy; 2019</span>
-            <span class="dotted">|</span>
-            <span>Powered by <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a></span>
-            <span class="dotted">|</span>
-            <span>Theme by <a href="javascript:">Loren</a></span>
-            <span class="dotted">|</span>
-            <span><a target="_blank" rel="noopener" href="http://www.beian.miit.gov.cn">浙ICP备18016660号-1</a></span>
-        </div>
-    </div>
-</footer>
-    </div>
+{% block sidebar %}
+  {{ sidebar_template.render(true) }}
+{% endblock %}
 
-<script>
-    hljs.initHighlightingOnLoad();
-</script>
-</body>
-</html>
+{% block script_extra %}
+  {% include '_scripts/pages/post-details.swig' %}
+{% endblock %}
