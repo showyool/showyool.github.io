@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>不是吧，还有人不知道三目运算符的BUG | Showyool&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="三目运算符一直是众多开发者信手拈来的一种写法，它简化了if-else的臃肿的写法，而是用一行代码替代，就感觉无形之中秀了一把。殊不知，这么帅气的代码也暗藏着一个BUG。 缘由头天晚上发布了一个功能，本以为是波澜不惊的一个需求，结果第二天kibana打出了成吨的NPE日志。这些NPE日志大多都不约而同都指向了我写的一行代码，我立马推了下我的眼镜，开始排查起来了。 问题代码Kibana的堆栈日志定位在">
+<meta property="og:type" content="article">
+<meta property="og:title" content="不是吧，还有人不知道三目运算符的BUG">
+<meta property="og:url" content="http://morejson.com/2020/09/15/%E4%B8%8D%E6%98%AF%E5%90%A7%EF%BC%8C%E8%BF%98%E6%9C%89%E4%BA%BA%E4%B8%8D%E7%9F%A5%E9%81%93%E4%B8%89%E7%9B%AE%E8%BF%90%E7%AE%97%E7%AC%A6%E7%9A%84BUG/index.html">
+<meta property="og:site_name" content="Showyool&#39;s Blog">
+<meta property="og:description" content="三目运算符一直是众多开发者信手拈来的一种写法，它简化了if-else的臃肿的写法，而是用一行代码替代，就感觉无形之中秀了一把。殊不知，这么帅气的代码也暗藏着一个BUG。 缘由头天晚上发布了一个功能，本以为是波澜不惊的一个需求，结果第二天kibana打出了成吨的NPE日志。这些NPE日志大多都不约而同都指向了我写的一行代码，我立马推了下我的眼镜，开始排查起来了。 问题代码Kibana的堆栈日志定位在">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/9088deb2a1d64625b0d1a9928c5e5687~tplv-k3u1fbpfcp-zoom-1.image">
+<meta property="og:image" content="https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/1962e052977442ca94f8ccae01dfb9b8~tplv-k3u1fbpfcp-zoom-1.image">
+<meta property="og:image" content="https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/bd4d15e03a6648a9836527c0b86e9645~tplv-k3u1fbpfcp-zoom-1.image">
+<meta property="og:image" content="https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/3401cb5ca9f140e98b87b151f8d2649f~tplv-k3u1fbpfcp-zoom-1.image">
+<meta property="og:image" content="https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/a20156d1b7c149f18c83f97303ff348e~tplv-k3u1fbpfcp-zoom-1.image">
+<meta property="og:image" content="https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/a54e3c77b9874d86a6efb6b4e50db067~tplv-k3u1fbpfcp-zoom-1.image">
+<meta property="og:image" content="https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/cfd72f4a137240e4865a0774bd43e19a~tplv-k3u1fbpfcp-zoom-1.image">
+<meta property="og:image" content="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/f078e9ebc9344138bb678036c14c79fc~tplv-k3u1fbpfcp-zoom-1.image">
+<meta property="og:image" content="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/007ce4e40961419dae7a9c9f3e92e454~tplv-k3u1fbpfcp-zoom-1.image">
+<meta property="og:image" content="https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/2146b099ffdf4abfa82fe526187b8547~tplv-k3u1fbpfcp-zoom-1.image">
+<meta property="article:published_time" content="2020-09-15T07:39:49.000Z">
+<meta property="article:modified_time" content="2020-10-22T08:48:24.403Z">
+<meta property="article:author" content="Showyool">
+<meta property="article:tag" content="Java">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/9088deb2a1d64625b0d1a9928c5e5687~tplv-k3u1fbpfcp-zoom-1.image">
+  
+    <link rel="alternate" href="/atom.xml" title="Showyool&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 5.2.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Showyool&#39;s Blog</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://morejson.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-不是吧，还有人不知道三目运算符的BUG" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/09/15/%E4%B8%8D%E6%98%AF%E5%90%A7%EF%BC%8C%E8%BF%98%E6%9C%89%E4%BA%BA%E4%B8%8D%E7%9F%A5%E9%81%93%E4%B8%89%E7%9B%AE%E8%BF%90%E7%AE%97%E7%AC%A6%E7%9A%84BUG/" class="article-date">
+  <time datetime="2020-09-15T07:39:49.000Z" itemprop="datePublished">2020-09-15</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      不是吧，还有人不知道三目运算符的BUG
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>三目运算符一直是众多开发者信手拈来的一种写法，它简化了if-else的臃肿的写法，而是用一行代码替代，就感觉无形之中秀了一把。<br><img src="https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/9088deb2a1d64625b0d1a9928c5e5687~tplv-k3u1fbpfcp-zoom-1.image"><br>殊不知，这么帅气的代码也暗藏着一个BUG。</p>
+<h2 id="缘由"><a href="#缘由" class="headerlink" title="缘由"></a>缘由</h2><p>头天晚上发布了一个功能，本以为是波澜不惊的一个需求，结果第二天kibana打出了成吨的NPE日志。这些NPE日志大多都不约而同都指向了我写的一行代码，我立马推了下我的眼镜，开始排查起来了。<br><img src="https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/1962e052977442ca94f8ccae01dfb9b8~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<h2 id="问题代码"><a href="#问题代码" class="headerlink" title="问题代码"></a>问题代码</h2><p><img src="https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/bd4d15e03a6648a9836527c0b86e9645~tplv-k3u1fbpfcp-zoom-1.image"><br>Kibana的堆栈日志定位在第899行。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">resultMap.put(<span class="string">&quot;unAuditPurchaseOrder&quot;</span>, switchConf == <span class="keyword">null</span> ? <span class="number">0</span> : switchConf.getUnAuditPurchaseOrder());</span><br></pre></td></tr></table></figure>
+<p>1.检查了resultMap，它在上面有实例化，不可能为空。<br /><br>2.检查switchConf，但是在这里有判空，也不会报错。<br>那是怎么回事？？？？<br><img src="https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/3401cb5ca9f140e98b87b151f8d2649f~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<h2 id="继续排查"><a href="#继续排查" class="headerlink" title="继续排查"></a>继续排查</h2><p>既然肉眼看不出，那么只能找一台测试机，用一下Arthas看一下具体的情况。（线上慎用，因为可能会造成卡顿）</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">trace com.aaa.bbb.ccc.ddd.eee.CustomerButtonService getPurchaseConfig -n 5 &#x27;1==1&#x27; --skipJDKMethod false</span><br></pre></td></tr></table></figure>
+<p><img src="https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/a20156d1b7c149f18c83f97303ff348e~tplv-k3u1fbpfcp-zoom-1.image"><br>果然，这里就发现了端倪。<br>这里竟然执行了intValue()！也就是说如果<code>switchConf.getUnAuditPurchaseOrder()</code>这个是null，那么就很明显发生了NPE。</p>
+<h2 id="看一下字节码"><a href="#看一下字节码" class="headerlink" title="看一下字节码"></a>看一下字节码</h2><p>为了显现效果，我换一个简单的程序</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        Integer i = <span class="keyword">null</span>;</span><br><span class="line">        System.out.println(<span class="number">1</span> != <span class="number">1</span> ? <span class="number">0</span> : i);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>定位到class文件目录，执行</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">javap -c -l <span class="keyword">Test</span></span><br></pre></td></tr></table></figure>
+<p><img src="https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/a54e3c77b9874d86a6efb6b4e50db067~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p>然后我又改了一下程序</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        Integer i = <span class="keyword">null</span>;</span><br><span class="line">        System.out.println(<span class="number">1</span> == <span class="number">1</span> ? <span class="number">0</span> : i);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这次运行并不会报错，看一下它的JVM指令:<br><img src="https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/cfd72f4a137240e4865a0774bd43e19a~tplv-k3u1fbpfcp-zoom-1.image"><br>因为三目运算符的结果是前者的逻辑，即返回一个常量0。</p>
+<h2 id="解释"><a href="#解释" class="headerlink" title="解释"></a>解释</h2><p>由上面的实验可以发现，JVM在解释三目运算符的时候，会对两个逻辑语句进行数据类型校验，按照基本数据类型为准。实验中，数据类型是基本数据类型，所以，如果逻辑走到了后者，那么就会进行自动的拆箱。这个隐式的操作就是造成这个BUG的原因。<br><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/f078e9ebc9344138bb678036c14c79fc~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<h2 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h2><p>既然知道原因了，那么只要统一数据类型就行：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        Integer i = <span class="keyword">null</span>;</span><br><span class="line">        System.out.println(<span class="number">1</span> != <span class="number">1</span> ? <span class="keyword">new</span> Integer(<span class="number">0</span>) : i);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>然后按照惯例，我们还是看一下他的JVM指令:<br><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/007ce4e40961419dae7a9c9f3e92e454~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<h2 id="拾遗"><a href="#拾遗" class="headerlink" title="拾遗"></a>拾遗</h2><p>后来在无意之中发现，原来这个例子在《阿里巴巴开发手册》当中也有被记录<br><img src="https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/2146b099ffdf4abfa82fe526187b8547~tplv-k3u1fbpfcp-zoom-1.image"><br>其实说的也是一回事情！<br /></p>
+<h2 id="后续"><a href="#后续" class="headerlink" title="后续"></a>后续</h2><p>最后,虽然问题是解决了，但我还是被测试同学记录了一下黑名单，这锅得背~</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://morejson.com/2020/09/15/%E4%B8%8D%E6%98%AF%E5%90%A7%EF%BC%8C%E8%BF%98%E6%9C%89%E4%BA%BA%E4%B8%8D%E7%9F%A5%E9%81%93%E4%B8%89%E7%9B%AE%E8%BF%90%E7%AE%97%E7%AC%A6%E7%9A%84BUG/" data-id="ckgl5dabp0000rkwnfkkg8hva" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/" rel="tag">Java</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/" rel="tag">Java</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Java/" style="font-size: 10px;">Java</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">九月 2020</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2020/09/15/%E4%B8%8D%E6%98%AF%E5%90%A7%EF%BC%8C%E8%BF%98%E6%9C%89%E4%BA%BA%E4%B8%8D%E7%9F%A5%E9%81%93%E4%B8%89%E7%9B%AE%E8%BF%90%E7%AE%97%E7%AC%A6%E7%9A%84BUG/">不是吧，还有人不知道三目运算符的BUG</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 Showyool<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>
