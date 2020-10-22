@@ -3,11 +3,11 @@
   <title>Showyool&#39;s Blog</title>
   
   
-  <link href="http://morejson.com/atom.xml" rel="self"/>
+  <link href="https://showyool.github.io/atom.xml" rel="self"/>
   
-  <link href="http://morejson.com/"/>
+  <link href="https://showyool.github.io/"/>
   <updated>2020-10-22T08:48:24.403Z</updated>
-  <id>http://morejson.com/</id>
+  <id>https://showyool.github.io/</id>
   
   <author>
     <name>Showyool</name>
@@ -18,8 +18,8 @@
   
   <entry>
     <title>不是吧，还有人不知道三目运算符的BUG</title>
-    <link href="http://morejson.com/2020/09/15/%E4%B8%8D%E6%98%AF%E5%90%A7%EF%BC%8C%E8%BF%98%E6%9C%89%E4%BA%BA%E4%B8%8D%E7%9F%A5%E9%81%93%E4%B8%89%E7%9B%AE%E8%BF%90%E7%AE%97%E7%AC%A6%E7%9A%84BUG/"/>
-    <id>http://morejson.com/2020/09/15/%E4%B8%8D%E6%98%AF%E5%90%A7%EF%BC%8C%E8%BF%98%E6%9C%89%E4%BA%BA%E4%B8%8D%E7%9F%A5%E9%81%93%E4%B8%89%E7%9B%AE%E8%BF%90%E7%AE%97%E7%AC%A6%E7%9A%84BUG/</id>
+    <link href="https://showyool.github.io/2020/09/15/%E4%B8%8D%E6%98%AF%E5%90%A7%EF%BC%8C%E8%BF%98%E6%9C%89%E4%BA%BA%E4%B8%8D%E7%9F%A5%E9%81%93%E4%B8%89%E7%9B%AE%E8%BF%90%E7%AE%97%E7%AC%A6%E7%9A%84BUG/"/>
+    <id>https://showyool.github.io/2020/09/15/%E4%B8%8D%E6%98%AF%E5%90%A7%EF%BC%8C%E8%BF%98%E6%9C%89%E4%BA%BA%E4%B8%8D%E7%9F%A5%E9%81%93%E4%B8%89%E7%9B%AE%E8%BF%90%E7%AE%97%E7%AC%A6%E7%9A%84BUG/</id>
     <published>2020-09-15T07:39:49.000Z</published>
     <updated>2020-10-22T08:48:24.403Z</updated>
     
@@ -34,7 +34,7 @@
     
     
     
-    <category term="Java" scheme="http://morejson.com/tags/Java/"/>
+    <category term="Java" scheme="https://showyool.github.io/tags/Java/"/>
     
   </entry>
   

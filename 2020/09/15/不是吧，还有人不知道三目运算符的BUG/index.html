@@ -21,7 +21,7 @@
   <meta name="description" content="三目运算符一直是众多开发者信手拈来的一种写法，它简化了if-else的臃肿的写法，而是用一行代码替代，就感觉无形之中秀了一把。殊不知，这么帅气的代码也暗藏着一个BUG。 缘由头天晚上发布了一个功能，本以为是波澜不惊的一个需求，结果第二天kibana打出了成吨的NPE日志。这些NPE日志大多都不约而同都指向了我写的一行代码，我立马推了下我的眼镜，开始排查起来了。 问题代码Kibana的堆栈日志定位在">
 <meta property="og:type" content="article">
 <meta property="og:title" content="不是吧，还有人不知道三目运算符的BUG">
-<meta property="og:url" content="http://morejson.com/2020/09/15/%E4%B8%8D%E6%98%AF%E5%90%A7%EF%BC%8C%E8%BF%98%E6%9C%89%E4%BA%BA%E4%B8%8D%E7%9F%A5%E9%81%93%E4%B8%89%E7%9B%AE%E8%BF%90%E7%AE%97%E7%AC%A6%E7%9A%84BUG/index.html">
+<meta property="og:url" content="https://showyool.github.io/2020/09/15/%E4%B8%8D%E6%98%AF%E5%90%A7%EF%BC%8C%E8%BF%98%E6%9C%89%E4%BA%BA%E4%B8%8D%E7%9F%A5%E9%81%93%E4%B8%89%E7%9B%AE%E8%BF%90%E7%AE%97%E7%AC%A6%E7%9A%84BUG/index.html">
 <meta property="og:site_name" content="Showyool&#39;s Blog">
 <meta property="og:description" content="三目运算符一直是众多开发者信手拈来的一种写法，它简化了if-else的臃肿的写法，而是用一行代码替代，就感觉无形之中秀了一把。殊不知，这么帅气的代码也暗藏着一个BUG。 缘由头天晚上发布了一个功能，本以为是波澜不惊的一个需求，结果第二天kibana打出了成吨的NPE日志。这些NPE日志大多都不约而同都指向了我写的一行代码，我立马推了下我的眼镜，开始排查起来了。 问题代码Kibana的堆栈日志定位在">
 <meta property="og:locale" content="zh_CN">
@@ -42,7 +42,7 @@
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/9088deb2a1d64625b0d1a9928c5e5687~tplv-k3u1fbpfcp-zoom-1.image">
   <!-- Canonical links -->
-  <link rel="canonical" href="http://morejson.com/2020/09/15/%E4%B8%8D%E6%98%AF%E5%90%A7%EF%BC%8C%E8%BF%98%E6%9C%89%E4%BA%BA%E4%B8%8D%E7%9F%A5%E9%81%93%E4%B8%89%E7%9B%AE%E8%BF%90%E7%AE%97%E7%AC%A6%E7%9A%84BUG/index.html">
+  <link rel="canonical" href="https://showyool.github.io/2020/09/15/%E4%B8%8D%E6%98%AF%E5%90%A7%EF%BC%8C%E8%BF%98%E6%9C%89%E4%BA%BA%E4%B8%8D%E7%9F%A5%E9%81%93%E4%B8%89%E7%9B%AE%E8%BF%90%E7%AE%97%E7%AC%A6%E7%9A%84BUG/index.html">
   
     <link rel="alternate" href="/atom.xml" title="Showyool&#39;s Blog" type="application/atom+xml">
   
@@ -59,7 +59,7 @@
 <meta name="generator" content="Hexo 5.2.0"></head>
 
 
-<body class="main-center theme-blue" itemscope itemtype="http://schema.org/WebPage">
+<body class="main-center theme-purple" itemscope itemtype="http://schema.org/WebPage">
   <header class="header" itemscope itemtype="http://schema.org/WPHeader">
   <div class="slimContent">
     <div class="navbar-header">
@@ -358,7 +358,7 @@
     
     <li class="post-copyright-link hidden-xs">
       <strong>本文链接：</strong>
-      <a href="http://morejson.com/2020/09/15/%E4%B8%8D%E6%98%AF%E5%90%A7%EF%BC%8C%E8%BF%98%E6%9C%89%E4%BA%BA%E4%B8%8D%E7%9F%A5%E9%81%93%E4%B8%89%E7%9B%AE%E8%BF%90%E7%AE%97%E7%AC%A6%E7%9A%84BUG/" title="不是吧，还有人不知道三目运算符的BUG" target="_blank" rel="external">http://morejson.com/2020/09/15/%E4%B8%8D%E6%98%AF%E5%90%A7%EF%BC%8C%E8%BF%98%E6%9C%89%E4%BA%BA%E4%B8%8D%E7%9F%A5%E9%81%93%E4%B8%89%E7%9B%AE%E8%BF%90%E7%AE%97%E7%AC%A6%E7%9A%84BUG/</a>
+      <a href="https://showyool.github.io/2020/09/15/%E4%B8%8D%E6%98%AF%E5%90%A7%EF%BC%8C%E8%BF%98%E6%9C%89%E4%BA%BA%E4%B8%8D%E7%9F%A5%E9%81%93%E4%B8%89%E7%9B%AE%E8%BF%90%E7%AE%97%E7%AC%A6%E7%9A%84BUG/" title="不是吧，还有人不知道三目运算符的BUG" target="_blank" rel="external">https://showyool.github.io/2020/09/15/%E4%B8%8D%E6%98%AF%E5%90%A7%EF%BC%8C%E8%BF%98%E6%9C%89%E4%BA%BA%E4%B8%8D%E7%9F%A5%E9%81%93%E4%B8%89%E7%9B%AE%E8%BF%90%E7%AE%97%E7%AC%A6%E7%9A%84BUG/</a>
     </li>
     
     <li class="post-copyright-license">
