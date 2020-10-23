@@ -3,11 +3,6 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>http://showyool.github.io/categories/</loc>
-    <lastmod>2020-10-19T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
     <loc>http://showyool.github.io/tags/java/</loc>
     <lastmod>2020-10-19T00:00:00+00:00</lastmod>
   </url>
@@ -29,11 +24,6 @@
   
   <url>
     <loc>http://showyool.github.io/post/6885187698420613127/</loc>
-    <lastmod>2020-10-19T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://showyool.github.io/categories/%E5%90%8E%E7%AB%AF/</loc>
     <lastmod>2020-10-19T00:00:00+00:00</lastmod>
   </url>
   
@@ -62,6 +52,10 @@
   
   <url>
     <loc>http://showyool.github.io/top/books/</loc>
+  </url>
+  
+  <url>
+    <loc>http://showyool.github.io/categories/</loc>
   </url>
   
   <url>
