@@ -1,49 +1,49 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>后端 on showyool个人博客</title>
-    <link>http://username.github.io/categories/%E5%90%8E%E7%AB%AF/</link>
-    <description>Recent content in 后端 on showyool个人博客</description>
+    <title>后端 on Showyool个人博客</title>
+    <link>http://showyool.github.io/categories/%E5%90%8E%E7%AB%AF/</link>
+    <description>Recent content in 后端 on Showyool个人博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
     <lastBuildDate>Mon, 19 Oct 2020 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="http://username.github.io/categories/%E5%90%8E%E7%AB%AF/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="http://showyool.github.io/categories/%E5%90%8E%E7%AB%AF/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>一次i&#43;&#43;引发的bug</title>
-      <link>http://username.github.io/post/6885187698420613127/</link>
+      <link>http://showyool.github.io/post/6885187698420613127/</link>
       <pubDate>Mon, 19 Oct 2020 00:00:00 +0000</pubDate>
       
-      <guid>http://username.github.io/post/6885187698420613127/</guid>
+      <guid>http://showyool.github.io/post/6885187698420613127/</guid>
       <description>大家好，作为日常写bug修bug的我，今天给大家带来前几天刚刚修复的一个事故。不得不承认，有我的地方总是会有这么多bug。 起因 故事的开始发生</description>
     </item>
     
     <item>
       <title>可能我这辈子也不会用Guava的Partition了</title>
-      <link>http://username.github.io/post/6881281564060155912/</link>
+      <link>http://showyool.github.io/post/6881281564060155912/</link>
       <pubDate>Thu, 08 Oct 2020 00:00:00 +0000</pubDate>
       
-      <guid>http://username.github.io/post/6881281564060155912/</guid>
+      <guid>http://showyool.github.io/post/6881281564060155912/</guid>
       <description>又写BUG了 上回书说道，我写的《这可能是你从未见过如此优雅的写法》里面的方法是为了将非业务和业务逻辑进行解耦出来，于是周围小伙伴觉得不错也都</description>
     </item>
     
     <item>
       <title>这可能是你从未见过如此优雅的写法</title>
-      <link>http://username.github.io/post/6875124241813995533/</link>
+      <link>http://showyool.github.io/post/6875124241813995533/</link>
       <pubDate>Tue, 22 Sep 2020 00:00:00 +0000</pubDate>
       
-      <guid>http://username.github.io/post/6875124241813995533/</guid>
+      <guid>http://showyool.github.io/post/6875124241813995533/</guid>
       <description>前言 看到这样的标题，第一反应是不是那个“渣渣辉”在电脑屏幕中挥舞着大砍刀，听着古天乐说着，“这是你从未玩过的全新版本”。当然，这并不是标题党</description>
     </item>
     
     <item>
       <title>不是吧，还有人不知道三目运算符的BUG</title>
-      <link>http://username.github.io/post/6872738517798584328/</link>
+      <link>http://showyool.github.io/post/6872738517798584328/</link>
       <pubDate>Tue, 15 Sep 2020 00:00:00 +0000</pubDate>
       
-      <guid>http://username.github.io/post/6872738517798584328/</guid>
+      <guid>http://showyool.github.io/post/6872738517798584328/</guid>
       <description>三目运算符一直是众多开发者信手拈来的一种写法，它简化了if-else的臃肿的写法，而是用一行代码替代，就感觉无形之中秀了一把。 殊不知，这么帅</description>
     </item>
     
