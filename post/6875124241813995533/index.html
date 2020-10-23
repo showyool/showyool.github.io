@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    
+    <meta property="og:site_name" content="showyool个人博客">
+    <meta property="og:type" content="article">
+
+    
+    <meta property="og:image" content="http://username.github.io//img/home-bg-jeep.jpg">
+    <meta property="twitter:image" content="http://username.github.io//img/home-bg-jeep.jpg" />
+    
+
+    
+    <meta name="title" content="这可能是你从未见过如此优雅的写法" />
+    <meta property="og:title" content="这可能是你从未见过如此优雅的写法" />
+    <meta property="twitter:title" content="这可能是你从未见过如此优雅的写法" />
+    
+
+    
+    <meta name="description" content="showyool，Java程序员, 杭州，BUG | 这里是 showyool 的博客，与你一起发现更大的世界。">
+    <meta property="og:description" content="showyool，Java程序员, 杭州，BUG | 这里是 showyool 的博客，与你一起发现更大的世界。" />
+    <meta property="twitter:description" content="showyool，Java程序员, 杭州，BUG | 这里是 showyool 的博客，与你一起发现更大的世界。" />
+    
+
+    
+    <meta property="twitter:card" content="summary" />
+    
+    
+
+    <meta name="keyword"  content="showyool, mengyirunian, fuchen, 梦一如年 , 浮沉, showyool的博客, showyool Blog, 博客, 个人网站, 互联网, Web, 云原生, Java, Spring, Kubernetes, 微服务, Dubbo">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>这可能是你从未见过如此优雅的写法-shoyool的博客 | showyool Blog</title>
+
+    <link rel="canonical" href="/post/6875124241813995533/">
+
+    <link rel="stylesheet" href="/css/iDisqus.min.css"/>
+	
+    
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    
+    <link rel="stylesheet" href="/css/hux-blog.min.css">
+
+    
+    <link rel="stylesheet" href="/css/zanshang.css">
+    
+    
+    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    
+    
+
+    
+    
+    <script src="/js/jquery.min.js"></script>
+    
+    
+    <script src="/js/bootstrap.min.js"></script>
+    
+    
+    <script src="/js/hux-blog.min.js"></script>
+
+    
+    
+
+</head>
+
+
+
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">showyool个人博客</a>
+        </div>
+
+        
+        
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+                    
+                        
+                        <li>
+                            <a href="/categories/%E5%90%8E%E7%AB%AF">后端</a>
+                        </li>
+                        
+                    
+                    
+		    
+                        <li><a href="/top/about/">简历</a></li>
+                    
+
+                    
+		    <li>
+                        <a href="/search">SEARCH <img src="/img/search.png" height="15" style="cursor: pointer;" alt="Search"></a>
+		    </li>
+                    
+                </ul>
+            </div>
+        </div>
+        
+    </div>
+    
+</nav>
+<script>
+    
+    
+    
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        
+            $navbar.className = " ";
+            
+            setTimeout(function(){
+                
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+
+
+<style type="text/css">
+    header.intro-header {
+        background-image: url('/img/home-bg-jeep.jpg')
+    }
+</style>
+<header class="intro-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                    </div>
+                    <h1>这可能是你从未见过如此优雅的写法</h1>
+                    <h2 class="subheading"></h2>
+                    <span class="meta">
+                        Posted by 
+                        
+                            showyool
+                         
+                        on 
+                        Tuesday, September 22, 2020
+                        
+                        
+                        
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+
+
+<article>
+    <div class="container">
+        <div class="row">
+
+            
+            <div class="
+                col-lg-11 col-lg-offset-1
+                col-md-10 col-md-offset-1
+                post-container">
+
+                
+                <header>
+                    <h2>TOC</h2>
+                </header>
+                <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#前言">前言</a></li>
+        <li><a href="#背景">背景</a></li>
+        <li><a href="#到底是什么样的代码呢">到底是什么样的代码呢</a></li>
+        <li><a href="#那么这个写法很优雅吗">那么这个写法很优雅吗</a></li>
+        <li><a href="#扩展">扩展</a></li>
+        <li><a href="#要是你会怎么写">要是你会怎么写</a></li>
+        <li><a href="#再来扩展一下">再来扩展一下</a></li>
+        <li><a href="#结尾">结尾</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+                
+                <h2 id="前言">前言</h2>
+<p>看到这样的标题，第一反应是不是那个“渣渣辉”在电脑屏幕中挥舞着大砍刀，听着古天乐说着，“这是你从未玩过的全新版本”。当然，这并不是标题党，既然“这是你从未玩过的全新版本”，那么“是兄弟就来看我的文章”。（不是兄弟也请留步，嘤嘤嘤）
+
+  <img src="https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/809dadaa2a94491cac5be25e641066b5~tplv-k3u1fbpfcp-zoom-1.image" alt="">
+
+</p>
+<h2 id="背景">背景</h2>
+<p>在对公司一个几百年没有更新维护旧项目进行功能开发的时候，由于当初开发这个项目的人早已各奔前程，也没有留下什么可视性的文档，所以只能从一些代码以及注释中尽可能地摸索这个项目的系统架构以及对应的业务功能，这无疑是一件十分头疼的事情（看别人的代码和看几个月前自己的代码就像是闻SHI一样）。<!-- raw HTML omitted -->
+看了几遍下来，大多数的代码写的都不堪直视，甚至连基本的格式化代码也没有，但是其中有一段的代码却引起了我的注意，也是因为这段代码才引起了我的思考，也是就有了这篇文章。</p>
+<h2 id="到底是什么样的代码呢">到底是什么样的代码呢</h2>
+<p>话不多说，直接上代码:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#ff79c6">new</span> AbstractSpinBusiness<span style="color:#ff79c6">()</span> <span style="color:#ff79c6">{</span>
+    @Override
+    <span style="color:#8be9fd;font-style:italic">protected</span> <span style="color:#8be9fd">boolean</span> <span style="color:#50fa7b">handle</span><span style="color:#ff79c6">()</span> <span style="color:#ff79c6">{</span>
+        CompanyProfile updateProfile <span style="color:#ff79c6">=</span> getProfileForUpdateConf<span style="color:#ff79c6">(</span>staff<span style="color:#ff79c6">,</span> attrMap<span style="color:#ff79c6">);</span>
+        <span style="color:#ff79c6">return</span> companyProfileDao<span style="color:#ff79c6">.</span><span style="color:#50fa7b">updateCompanyProfileConf</span><span style="color:#ff79c6">(</span>updateProfile<span style="color:#ff79c6">)</span> <span style="color:#ff79c6">&gt;</span> 0<span style="color:#ff79c6">;</span>
+    <span style="color:#ff79c6">}</span>
+<span style="color:#ff79c6">}.</span><span style="color:#50fa7b">spin</span><span style="color:#ff79c6">(</span>5<span style="color:#ff79c6">);</span>
+</code></pre></div><p>简单介绍下，这段的意思是执行handle()里面的方法，并且设置了5次重试限制。<!-- raw HTML omitted -->
+然后我们再来看看AbstractSpinBusiness这个抽象类<!-- raw HTML omitted -->
+<strong>AbstractSpinBusiness.class</strong></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#ff79c6">import</span> org.apache.log4j.Logger<span style="color:#ff79c6">;</span>
+
+<span style="color:#8be9fd;font-style:italic">public</span> <span style="color:#8be9fd;font-style:italic">abstract</span> <span style="color:#8be9fd;font-style:italic">class</span> <span style="color:#50fa7b">AbstractSpinBusiness</span> <span style="color:#ff79c6">{</span>
+
+    <span style="color:#8be9fd;font-style:italic">private</span> Logger logger <span style="color:#ff79c6">=</span> Logger<span style="color:#ff79c6">.</span><span style="color:#50fa7b">getLogger</span><span style="color:#ff79c6">(</span><span style="color:#ff79c6">this</span><span style="color:#ff79c6">.</span><span style="color:#50fa7b">getClass</span><span style="color:#ff79c6">());</span>
+
+    <span style="color:#8be9fd;font-style:italic">public</span> <span style="color:#8be9fd">void</span> <span style="color:#50fa7b">spin</span><span style="color:#ff79c6">(</span><span style="color:#8be9fd">int</span> times<span style="color:#ff79c6">){</span>
+
+        <span style="color:#ff79c6">for</span><span style="color:#ff79c6">(</span><span style="color:#8be9fd">int</span> i <span style="color:#ff79c6">=</span> 0<span style="color:#ff79c6">;</span> i <span style="color:#ff79c6">&lt;</span> times<span style="color:#ff79c6">;</span> i<span style="color:#ff79c6">++){</span>
+            <span style="color:#ff79c6">if</span><span style="color:#ff79c6">(</span>handle<span style="color:#ff79c6">()){</span>
+                <span style="color:#ff79c6">return</span><span style="color:#ff79c6">;</span>
+            <span style="color:#ff79c6">}</span>
+            logger<span style="color:#ff79c6">.</span><span style="color:#50fa7b">debug</span><span style="color:#ff79c6">(</span>String<span style="color:#ff79c6">.</span><span style="color:#50fa7b">format</span><span style="color:#ff79c6">(</span><span style="color:#f1fa8c">&#34;spin重试%s&#34;</span><span style="color:#ff79c6">,</span> i<span style="color:#ff79c6">));</span>
+        <span style="color:#ff79c6">}</span>
+    <span style="color:#ff79c6">}</span>
+
+    <span style="color:#6272a4">/**
+</span><span style="color:#6272a4">     * 执行主体
+</span><span style="color:#6272a4">     * @return true:执行成功,不需要重试  false:执行失败
+</span><span style="color:#6272a4">     */</span>
+    <span style="color:#8be9fd;font-style:italic">protected</span> <span style="color:#8be9fd;font-style:italic">abstract</span> <span style="color:#8be9fd">boolean</span> <span style="color:#50fa7b">handle</span><span style="color:#ff79c6">();</span>
+
+<span style="color:#ff79c6">}</span>
+</code></pre></div><p>看到这里，好像也不过只是对AbstractSpinBusiness当中的handle的实现，并且运用在spin方法当中。可能细心的同学已经发现了这使用了模板的设计模式，如果能够发现，那么给你点个赞；如果没能发现，问题也不大，因为我在这里也并非是来讲模板设计模式。当然，模板设计模式也是十分重要且优秀的写法，在抽象业务、架构当中用的是遍地开花！</p>
+<h2 id="那么这个写法很优雅吗">那么这个写法很优雅吗</h2>
+<p>回想一下我们最早学习JDBC的时候，我们需要手动获取Connection，需要将参数设置到PreparedStatement当中，执行之后需要将对象再包装成我们想要的数据格式，这一系列的操作下来，我们可以发现，真正跟业务相贴切的就只是那一条SQL而已，其他的工作都只是一个辅助工作。<!-- raw HTML omitted -->
+
+  <img src="https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/0a2c842956c8485697fae3a9a041eeca~tplv-k3u1fbpfcp-zoom-1.image" alt="">
+
+</p>
+<p>所以，像MyBatis、Hibernate等这类ORM框架才会孕育而生。开发人员在使用这些框架的时候，只需要关心我们自己的业务。例如MyBatis，我们只需要写好业务的SQL以及对应的Mapper，那么整合到业务的Service当中就可以，而其他的操作已经封装在框架中无感知执行。<!-- raw HTML omitted --></p>
+<p>回归到我们刚开始的那段代码当中。不难发现这简单的代码中，其实蕴含着同样的思想，那就是将业务代码和非业务代码独立开来。试想，如果有其他地方也需要使用类似的重试逻辑，那么是否又需要写一套重试的代码呢？<!-- raw HTML omitted -->
+
+  <img src="https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/30231d3b92a3400582939fd642bf35c9~tplv-k3u1fbpfcp-zoom-1.image" alt="">
+
+</p>
+<h2 id="扩展">扩展</h2>
+<p>沿着这样的思路，在最近一次优化中使用了相同的写法。<!-- raw HTML omitted -->目前系统中存在一些慢SQL，SQL的本身是比较简单，EXPLAIN执行计划当中也没有什么问题，就只是单纯的rows比较多。问题在于业务中产生大量的参数，导致in里面的数据太多，造成SQL执行效率变低。那么比较直接的优化就是控制这里的参数，进行分批处理。（当然这里就不考虑网上说的子查询或者是eq_range_index_dive_limit参数之类）
+<!-- raw HTML omitted --></p>
+<h2 id="要是你会怎么写">要是你会怎么写</h2>
+<p>要是没有前面的引子，我想大家的代码大概会是这样</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#ff79c6">import</span> com.google.common.collect.Lists<span style="color:#ff79c6">;</span>
+
+<span style="color:#ff79c6">import</span> java.util.List<span style="color:#ff79c6">;</span>
+
+<span style="color:#8be9fd;font-style:italic">public</span> <span style="color:#8be9fd;font-style:italic">class</span> <span style="color:#50fa7b">Test</span> <span style="color:#ff79c6">{</span>
+
+    <span style="color:#8be9fd;font-style:italic">public</span> <span style="color:#8be9fd;font-style:italic">static</span> <span style="color:#8be9fd;font-style:italic">final</span> <span style="color:#8be9fd">int</span> PARTITION_SIZE <span style="color:#ff79c6">=</span> 1000<span style="color:#ff79c6">;</span>
+    
+    <span style="color:#8be9fd;font-style:italic">public</span> <span style="color:#8be9fd;font-style:italic">static</span> <span style="color:#8be9fd">void</span> <span style="color:#50fa7b">main</span><span style="color:#ff79c6">(</span>String<span style="color:#ff79c6">[]</span> args<span style="color:#ff79c6">)</span> <span style="color:#ff79c6">{</span>
+        
+        <span style="color:#6272a4">// 这里就模拟是业务参数
+</span><span style="color:#6272a4"></span>        List<span style="color:#ff79c6">&lt;</span>Long<span style="color:#ff79c6">&gt;</span> paramIds <span style="color:#ff79c6">=</span> Lists<span style="color:#ff79c6">.</span><span style="color:#50fa7b">newArrayList</span><span style="color:#ff79c6">(</span>1L<span style="color:#ff79c6">,</span>2L<span style="color:#ff79c6">,</span>3L<span style="color:#ff79c6">);</span>
+        <span style="color:#6272a4">// 进行分隔
+</span><span style="color:#6272a4"></span>        List<span style="color:#ff79c6">&lt;</span>List<span style="color:#ff79c6">&lt;</span>Long<span style="color:#ff79c6">&gt;&gt;</span> partitionParamIds <span style="color:#ff79c6">=</span> Lists<span style="color:#ff79c6">.</span><span style="color:#50fa7b">partition</span><span style="color:#ff79c6">(</span>paramIds<span style="color:#ff79c6">,</span> PARTITION_SIZE<span style="color:#ff79c6">);</span>
+        List<span style="color:#ff79c6">&lt;</span>Object<span style="color:#ff79c6">&gt;</span> resultList <span style="color:#ff79c6">=</span> Lists<span style="color:#ff79c6">.</span><span style="color:#50fa7b">newArrayListWithExpectedSize</span><span style="color:#ff79c6">(</span>paramIds<span style="color:#ff79c6">.</span><span style="color:#50fa7b">size</span><span style="color:#ff79c6">());</span>
+        partitionParamIds<span style="color:#ff79c6">.</span><span style="color:#50fa7b">forEach</span><span style="color:#ff79c6">(</span>partition <span style="color:#ff79c6">-&gt;</span> <span style="color:#ff79c6">{</span>
+            <span style="color:#6272a4">// 执行具体的DAO操作，当然这里也是模拟
+</span><span style="color:#6272a4"></span>            resultList<span style="color:#ff79c6">.</span><span style="color:#50fa7b">addAll</span><span style="color:#ff79c6">(</span><span style="color:#ff79c6">new</span> ObjectDao<span style="color:#ff79c6">().</span><span style="color:#50fa7b">getList</span><span style="color:#ff79c6">(</span>partition<span style="color:#ff79c6">));</span>
+        <span style="color:#ff79c6">});</span>
+        System<span style="color:#ff79c6">.</span><span style="color:#50fa7b">out</span><span style="color:#ff79c6">.</span><span style="color:#50fa7b">println</span><span style="color:#ff79c6">(</span>resultList<span style="color:#ff79c6">.</span><span style="color:#50fa7b">size</span><span style="color:#ff79c6">());</span>
+    <span style="color:#ff79c6">}</span>
+    
+<span style="color:#ff79c6">}</span>
+
+<span style="color:#8be9fd;font-style:italic">class</span> <span style="color:#50fa7b">ObjectDao</span> <span style="color:#ff79c6">{</span>
+    
+    <span style="color:#6272a4">// 都说了是模拟模拟，不要挑刺了
+</span><span style="color:#6272a4"></span>    <span style="color:#8be9fd;font-style:italic">public</span> List<span style="color:#ff79c6">&lt;</span>Object<span style="color:#ff79c6">&gt;</span> <span style="color:#50fa7b">getList</span><span style="color:#ff79c6">(</span>List<span style="color:#ff79c6">&lt;</span>Long<span style="color:#ff79c6">&gt;</span> paramIds<span style="color:#ff79c6">)</span> <span style="color:#ff79c6">{</span>
+        List<span style="color:#ff79c6">&lt;</span>Object<span style="color:#ff79c6">&gt;</span> resultList <span style="color:#ff79c6">=</span> Lists<span style="color:#ff79c6">.</span><span style="color:#50fa7b">newArrayList</span><span style="color:#ff79c6">();</span>
+        <span style="color:#ff79c6">for</span> <span style="color:#ff79c6">(</span>Long paramId <span style="color:#ff79c6">:</span> paramIds<span style="color:#ff79c6">)</span> <span style="color:#ff79c6">{</span>
+            resultList<span style="color:#ff79c6">.</span><span style="color:#50fa7b">add</span><span style="color:#ff79c6">(</span>paramId<span style="color:#ff79c6">);</span>
+        <span style="color:#ff79c6">}</span>
+        <span style="color:#ff79c6">return</span> resultList<span style="color:#ff79c6">;</span>
+    <span style="color:#ff79c6">}</span>
+    
+<span style="color:#ff79c6">}</span>
+</code></pre></div><p>其实这样写本身也是比较简单整洁的，但是有没有发现，这里切片的动作和具体的业务代码还是混杂在一起，做不到一定意义上的职责分明。那是不是可以提供一个辅助类来做这些事情呢，所以我改写下。
+
+  <img src="https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/dbdb46fc19004aaaaf86aef31dcb75ba~tplv-k3u1fbpfcp-zoom-1.image" alt="">
+
+</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#ff79c6">import</span> com.google.common.collect.Lists<span style="color:#ff79c6">;</span>
+
+<span style="color:#ff79c6">import</span> java.util.List<span style="color:#ff79c6">;</span>
+
+<span style="color:#8be9fd;font-style:italic">public</span> <span style="color:#8be9fd;font-style:italic">class</span> <span style="color:#50fa7b">Test</span> <span style="color:#ff79c6">{</span>
+
+    <span style="color:#8be9fd;font-style:italic">public</span> <span style="color:#8be9fd;font-style:italic">static</span> <span style="color:#8be9fd">void</span> <span style="color:#50fa7b">main</span><span style="color:#ff79c6">(</span>String<span style="color:#ff79c6">[]</span> args<span style="color:#ff79c6">)</span> <span style="color:#ff79c6">{</span>
+
+        <span style="color:#6272a4">// 这里就模拟是业务参数
+</span><span style="color:#6272a4"></span>        List<span style="color:#ff79c6">&lt;</span>Long<span style="color:#ff79c6">&gt;</span> paramIds <span style="color:#ff79c6">=</span> Lists<span style="color:#ff79c6">.</span><span style="color:#50fa7b">newArrayList</span><span style="color:#ff79c6">(</span>1L<span style="color:#ff79c6">,</span>2L<span style="color:#ff79c6">,</span>3L<span style="color:#ff79c6">);</span>
+        List<span style="color:#ff79c6">&lt;</span>Object<span style="color:#ff79c6">&gt;</span> resultList <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">new</span> CommonDoPartition<span style="color:#ff79c6">&lt;&gt;().</span><span style="color:#50fa7b">partitionToQuery</span><span style="color:#ff79c6">(</span>paramIds<span style="color:#ff79c6">,</span>
+                partition <span style="color:#ff79c6">-&gt;</span> <span style="color:#ff79c6">new</span> ObjectDao<span style="color:#ff79c6">().</span><span style="color:#50fa7b">getList</span><span style="color:#ff79c6">(</span>partition<span style="color:#ff79c6">));</span>
+        System<span style="color:#ff79c6">.</span><span style="color:#50fa7b">out</span><span style="color:#ff79c6">.</span><span style="color:#50fa7b">println</span><span style="color:#ff79c6">(</span>resultList<span style="color:#ff79c6">.</span><span style="color:#50fa7b">size</span><span style="color:#ff79c6">());</span>
+    <span style="color:#ff79c6">}</span>
+
+<span style="color:#ff79c6">}</span>
+
+<span style="color:#8be9fd;font-style:italic">class</span> <span style="color:#50fa7b">ObjectDao</span> <span style="color:#ff79c6">{</span>
+
+    <span style="color:#6272a4">// 都说了是模拟模拟，不要挑刺了
+</span><span style="color:#6272a4"></span>    <span style="color:#8be9fd;font-style:italic">public</span> List<span style="color:#ff79c6">&lt;</span>Object<span style="color:#ff79c6">&gt;</span> <span style="color:#50fa7b">getList</span><span style="color:#ff79c6">(</span>List<span style="color:#ff79c6">&lt;</span>Long<span style="color:#ff79c6">&gt;</span> paramIds<span style="color:#ff79c6">)</span> <span style="color:#ff79c6">{</span>
+        List<span style="color:#ff79c6">&lt;</span>Object<span style="color:#ff79c6">&gt;</span> resultList <span style="color:#ff79c6">=</span> Lists<span style="color:#ff79c6">.</span><span style="color:#50fa7b">newArrayList</span><span style="color:#ff79c6">();</span>
+        <span style="color:#ff79c6">for</span> <span style="color:#ff79c6">(</span>Long paramId <span style="color:#ff79c6">:</span> paramIds<span style="color:#ff79c6">)</span> <span style="color:#ff79c6">{</span>
+            resultList<span style="color:#ff79c6">.</span><span style="color:#50fa7b">add</span><span style="color:#ff79c6">(</span>paramId<span style="color:#ff79c6">);</span>
+        <span style="color:#ff79c6">}</span>
+        <span style="color:#ff79c6">return</span> resultList<span style="color:#ff79c6">;</span>
+    <span style="color:#ff79c6">}</span>
+
+<span style="color:#ff79c6">}</span>
+</code></pre></div><p>这里用到了一个CommonDoPartition类，我们来看下它是怎么实现的<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->CommonDoPartition.java<!-- raw HTML omitted --></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#ff79c6">import</span> com.google.common.collect.Lists<span style="color:#ff79c6">;</span>
+<span style="color:#ff79c6">import</span> org.apache.commons.collections.CollectionUtils<span style="color:#ff79c6">;</span>
+<span style="color:#ff79c6">import</span> org.apache.log4j.Logger<span style="color:#ff79c6">;</span>
+
+<span style="color:#ff79c6">import</span> java.util.List<span style="color:#ff79c6">;</span>
+<span style="color:#ff79c6">import</span> java.util.function.Function<span style="color:#ff79c6">;</span>
+
+<span style="color:#8be9fd;font-style:italic">public</span> <span style="color:#8be9fd;font-style:italic">class</span> <span style="color:#50fa7b">CommonDoPartition</span><span style="color:#ff79c6">&lt;</span>T<span style="color:#ff79c6">&gt;</span> <span style="color:#ff79c6">{</span>
+
+    <span style="color:#8be9fd;font-style:italic">private</span> <span style="color:#8be9fd;font-style:italic">final</span> <span style="color:#8be9fd;font-style:italic">static</span> Logger logger <span style="color:#ff79c6">=</span> Logger<span style="color:#ff79c6">.</span><span style="color:#50fa7b">getLogger</span><span style="color:#ff79c6">(</span>CommonDoPartition<span style="color:#ff79c6">.</span><span style="color:#50fa7b">class</span><span style="color:#ff79c6">);</span>
+
+    <span style="color:#8be9fd;font-style:italic">public</span> <span style="color:#8be9fd;font-style:italic">static</span> <span style="color:#8be9fd;font-style:italic">final</span> <span style="color:#8be9fd">int</span> PARTITION_SIZE <span style="color:#ff79c6">=</span> 1000<span style="color:#ff79c6">;</span>
+
+    <span style="color:#8be9fd;font-style:italic">public</span> <span style="color:#ff79c6">&lt;</span>T<span style="color:#ff79c6">,</span> R<span style="color:#ff79c6">&gt;</span> List<span style="color:#ff79c6">&lt;</span>R<span style="color:#ff79c6">&gt;</span> <span style="color:#50fa7b">partitionToQuery</span><span style="color:#ff79c6">(</span><span style="color:#8be9fd">int</span> partitionSize<span style="color:#ff79c6">,</span> List<span style="color:#ff79c6">&lt;</span>T<span style="color:#ff79c6">&gt;</span> all<span style="color:#ff79c6">,</span> Function<span style="color:#ff79c6">&lt;</span>List<span style="color:#ff79c6">&lt;</span>T<span style="color:#ff79c6">&gt;,</span> List<span style="color:#ff79c6">&lt;</span>R<span style="color:#ff79c6">&gt;&gt;</span> function<span style="color:#ff79c6">)</span> <span style="color:#ff79c6">{</span>
+        <span style="color:#ff79c6">if</span> <span style="color:#ff79c6">(</span>CollectionUtils<span style="color:#ff79c6">.</span><span style="color:#50fa7b">isEmpty</span><span style="color:#ff79c6">(</span>all<span style="color:#ff79c6">))</span> <span style="color:#ff79c6">{</span>
+            logger<span style="color:#ff79c6">.</span><span style="color:#50fa7b">warn</span><span style="color:#ff79c6">(</span><span style="color:#f1fa8c">&#34;no data to query&#34;</span><span style="color:#ff79c6">);</span>
+            <span style="color:#ff79c6">return</span> Lists<span style="color:#ff79c6">.</span><span style="color:#50fa7b">newArrayList</span><span style="color:#ff79c6">();</span>
+        <span style="color:#ff79c6">}</span>
+
+        List<span style="color:#ff79c6">&lt;</span>List<span style="color:#ff79c6">&lt;</span>T<span style="color:#ff79c6">&gt;&gt;</span> partitions <span style="color:#ff79c6">=</span> Lists<span style="color:#ff79c6">.</span><span style="color:#50fa7b">partition</span><span style="color:#ff79c6">(</span>all<span style="color:#ff79c6">,</span> partitionSize<span style="color:#ff79c6">);</span>
+        List<span style="color:#ff79c6">&lt;</span>R<span style="color:#ff79c6">&gt;</span> result <span style="color:#ff79c6">=</span> Lists<span style="color:#ff79c6">.</span><span style="color:#50fa7b">newArrayList</span><span style="color:#ff79c6">();</span>
+        <span style="color:#ff79c6">for</span> <span style="color:#ff79c6">(</span>List<span style="color:#ff79c6">&lt;</span>T<span style="color:#ff79c6">&gt;</span> list <span style="color:#ff79c6">:</span> partitions<span style="color:#ff79c6">)</span> <span style="color:#ff79c6">{</span>
+            List<span style="color:#ff79c6">&lt;</span>R<span style="color:#ff79c6">&gt;</span> resultList <span style="color:#ff79c6">=</span> function<span style="color:#ff79c6">.</span><span style="color:#50fa7b">apply</span><span style="color:#ff79c6">(</span>list<span style="color:#ff79c6">);</span>
+            <span style="color:#ff79c6">if</span> <span style="color:#ff79c6">(!</span>CollectionUtils<span style="color:#ff79c6">.</span><span style="color:#50fa7b">isEmpty</span><span style="color:#ff79c6">(</span>resultList<span style="color:#ff79c6">))</span> <span style="color:#ff79c6">{</span>
+                result<span style="color:#ff79c6">.</span><span style="color:#50fa7b">addAll</span><span style="color:#ff79c6">(</span>resultList<span style="color:#ff79c6">);</span>
+            <span style="color:#ff79c6">}</span>
+        <span style="color:#ff79c6">}</span>
+        <span style="color:#ff79c6">return</span> result<span style="color:#ff79c6">;</span>
+    <span style="color:#ff79c6">}</span>
+
+    <span style="color:#8be9fd;font-style:italic">public</span> <span style="color:#ff79c6">&lt;</span>T<span style="color:#ff79c6">,</span> R<span style="color:#ff79c6">&gt;</span> List<span style="color:#ff79c6">&lt;</span>R<span style="color:#ff79c6">&gt;</span> <span style="color:#50fa7b">partitionToQuery</span><span style="color:#ff79c6">(</span>List<span style="color:#ff79c6">&lt;</span>T<span style="color:#ff79c6">&gt;</span> all<span style="color:#ff79c6">,</span> Function<span style="color:#ff79c6">&lt;</span>List<span style="color:#ff79c6">&lt;</span>T<span style="color:#ff79c6">&gt;,</span> List<span style="color:#ff79c6">&lt;</span>R<span style="color:#ff79c6">&gt;&gt;</span> function<span style="color:#ff79c6">)</span> <span style="color:#ff79c6">{</span>
+        <span style="color:#ff79c6">return</span> <span style="color:#ff79c6">this</span><span style="color:#ff79c6">.</span><span style="color:#50fa7b">partitionToQuery</span><span style="color:#ff79c6">(</span>PARTITION_SIZE<span style="color:#ff79c6">,</span> all<span style="color:#ff79c6">,</span> function<span style="color:#ff79c6">);</span>
+    <span style="color:#ff79c6">}</span>
+
+<span style="color:#ff79c6">}</span>
+</code></pre></div><p>可以看到，分片的操作放到了这个公共方法当中，于是业务方只需要用lambda表达式支持他想要的业务逻辑就可以了，非业务性质工作都可以由这个工具类来完成。</p>
+<h2 id="再来扩展一下">再来扩展一下</h2>
+<p>既然实现了查询操作，同样也可以搞一下执行操作
+
+  <img src="https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/4f42e23cc29f4f11960db9194a4ba204~tplv-k3u1fbpfcp-zoom-1.image" alt="">
+
+</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">    <span style="color:#8be9fd;font-style:italic">public</span> <span style="color:#8be9fd">void</span> <span style="color:#50fa7b">partitionToDo</span><span style="color:#ff79c6">(</span><span style="color:#8be9fd">int</span> partitionSize<span style="color:#ff79c6">,</span> List<span style="color:#ff79c6">&lt;</span>T<span style="color:#ff79c6">&gt;</span> all<span style="color:#ff79c6">,</span> Consumer<span style="color:#ff79c6">&lt;</span>List<span style="color:#ff79c6">&lt;</span>T<span style="color:#ff79c6">&gt;&gt;</span> consumer<span style="color:#ff79c6">)</span> <span style="color:#ff79c6">{</span>
+        <span style="color:#ff79c6">if</span> <span style="color:#ff79c6">(</span>CollectionUtils<span style="color:#ff79c6">.</span><span style="color:#50fa7b">isEmpty</span><span style="color:#ff79c6">(</span>all<span style="color:#ff79c6">))</span> <span style="color:#ff79c6">{</span>
+            logger<span style="color:#ff79c6">.</span><span style="color:#50fa7b">warn</span><span style="color:#ff79c6">(</span><span style="color:#f1fa8c">&#34;no data to consume&#34;</span><span style="color:#ff79c6">);</span>
+            <span style="color:#ff79c6">return</span><span style="color:#ff79c6">;</span>
+        <span style="color:#ff79c6">}</span>
+
+        List<span style="color:#ff79c6">&lt;</span>List<span style="color:#ff79c6">&lt;</span>T<span style="color:#ff79c6">&gt;&gt;</span> partitions <span style="color:#ff79c6">=</span> Lists<span style="color:#ff79c6">.</span><span style="color:#50fa7b">partition</span><span style="color:#ff79c6">(</span>all<span style="color:#ff79c6">,</span> partitionSize<span style="color:#ff79c6">);</span>
+        <span style="color:#ff79c6">for</span> <span style="color:#ff79c6">(</span>List<span style="color:#ff79c6">&lt;</span>T<span style="color:#ff79c6">&gt;</span> list <span style="color:#ff79c6">:</span> partitions<span style="color:#ff79c6">)</span> <span style="color:#ff79c6">{</span>
+            consumer<span style="color:#ff79c6">.</span><span style="color:#50fa7b">accept</span><span style="color:#ff79c6">(</span>list<span style="color:#ff79c6">);</span>
+        <span style="color:#ff79c6">}</span>
+    <span style="color:#ff79c6">}</span>
+
+    <span style="color:#8be9fd;font-style:italic">public</span> <span style="color:#8be9fd">void</span> <span style="color:#50fa7b">partitionToDo</span><span style="color:#ff79c6">(</span>List<span style="color:#ff79c6">&lt;</span>T<span style="color:#ff79c6">&gt;</span> all<span style="color:#ff79c6">,</span> Consumer<span style="color:#ff79c6">&lt;</span>List<span style="color:#ff79c6">&lt;</span>T<span style="color:#ff79c6">&gt;&gt;</span> consumer<span style="color:#ff79c6">)</span> <span style="color:#ff79c6">{</span>
+        <span style="color:#ff79c6">this</span><span style="color:#ff79c6">.</span><span style="color:#50fa7b">partitionToDo</span><span style="color:#ff79c6">(</span>PARTITION_SIZE<span style="color:#ff79c6">,</span> all<span style="color:#ff79c6">,</span> consumer<span style="color:#ff79c6">);</span>
+    <span style="color:#ff79c6">}</span>
+    
+    
+    <span style="color:#8be9fd;font-style:italic">public</span> <span style="color:#ff79c6">&lt;</span>T<span style="color:#ff79c6">,</span> R<span style="color:#ff79c6">&gt;</span> <span style="color:#8be9fd">void</span> <span style="color:#50fa7b">partitionToQueryAndDo</span><span style="color:#ff79c6">(</span><span style="color:#8be9fd">int</span> partitionSize<span style="color:#ff79c6">,</span> List<span style="color:#ff79c6">&lt;</span>T<span style="color:#ff79c6">&gt;</span> all<span style="color:#ff79c6">,</span> Function<span style="color:#ff79c6">&lt;</span>List<span style="color:#ff79c6">&lt;</span>T<span style="color:#ff79c6">&gt;,</span> List<span style="color:#ff79c6">&lt;</span>R<span style="color:#ff79c6">&gt;&gt;</span> function<span style="color:#ff79c6">,</span> Consumer<span style="color:#ff79c6">&lt;</span>List<span style="color:#ff79c6">&lt;</span>R<span style="color:#ff79c6">&gt;&gt;</span> consumer<span style="color:#ff79c6">)</span> <span style="color:#ff79c6">{</span>
+        <span style="color:#ff79c6">if</span> <span style="color:#ff79c6">(</span>CollectionUtils<span style="color:#ff79c6">.</span><span style="color:#50fa7b">isEmpty</span><span style="color:#ff79c6">(</span>all<span style="color:#ff79c6">))</span> <span style="color:#ff79c6">{</span>
+            logger<span style="color:#ff79c6">.</span><span style="color:#50fa7b">warn</span><span style="color:#ff79c6">(</span><span style="color:#f1fa8c">&#34;no data to consume&#34;</span><span style="color:#ff79c6">);</span>
+            <span style="color:#ff79c6">return</span><span style="color:#ff79c6">;</span>
+        <span style="color:#ff79c6">}</span>
+
+        List<span style="color:#ff79c6">&lt;</span>List<span style="color:#ff79c6">&lt;</span>T<span style="color:#ff79c6">&gt;&gt;</span> partitions <span style="color:#ff79c6">=</span> Lists<span style="color:#ff79c6">.</span><span style="color:#50fa7b">partition</span><span style="color:#ff79c6">(</span>all<span style="color:#ff79c6">,</span> partitionSize<span style="color:#ff79c6">);</span>
+        List<span style="color:#ff79c6">&lt;</span>R<span style="color:#ff79c6">&gt;</span> resultList<span style="color:#ff79c6">;</span>
+        <span style="color:#ff79c6">for</span> <span style="color:#ff79c6">(</span>List<span style="color:#ff79c6">&lt;</span>T<span style="color:#ff79c6">&gt;</span> list <span style="color:#ff79c6">:</span> partitions<span style="color:#ff79c6">)</span> <span style="color:#ff79c6">{</span>
+            resultList <span style="color:#ff79c6">=</span> function<span style="color:#ff79c6">.</span><span style="color:#50fa7b">apply</span><span style="color:#ff79c6">(</span>list<span style="color:#ff79c6">);</span>
+            consumer<span style="color:#ff79c6">.</span><span style="color:#50fa7b">accept</span><span style="color:#ff79c6">(</span>resultList<span style="color:#ff79c6">);</span>
+        <span style="color:#ff79c6">}</span>
+    <span style="color:#ff79c6">}</span>
+
+    <span style="color:#8be9fd;font-style:italic">public</span> <span style="color:#ff79c6">&lt;</span>T<span style="color:#ff79c6">,</span> R<span style="color:#ff79c6">&gt;</span> <span style="color:#8be9fd">void</span> <span style="color:#50fa7b">partitionToQueryAndDo</span><span style="color:#ff79c6">(</span>List<span style="color:#ff79c6">&lt;</span>T<span style="color:#ff79c6">&gt;</span> all<span style="color:#ff79c6">,</span> Function<span style="color:#ff79c6">&lt;</span>List<span style="color:#ff79c6">&lt;</span>T<span style="color:#ff79c6">&gt;,</span> List<span style="color:#ff79c6">&lt;</span>R<span style="color:#ff79c6">&gt;&gt;</span> function<span style="color:#ff79c6">,</span> Consumer<span style="color:#ff79c6">&lt;</span>List<span style="color:#ff79c6">&lt;</span>R<span style="color:#ff79c6">&gt;&gt;</span> consumer<span style="color:#ff79c6">)</span> <span style="color:#ff79c6">{</span>
+        <span style="color:#ff79c6">this</span><span style="color:#ff79c6">.</span><span style="color:#50fa7b">partitionToQueryAndDo</span><span style="color:#ff79c6">(</span>PARTITION_SIZE<span style="color:#ff79c6">,</span> all<span style="color:#ff79c6">,</span> function<span style="color:#ff79c6">,</span> consumer<span style="color:#ff79c6">);</span>
+    <span style="color:#ff79c6">}</span>
+</code></pre></div><p>这里的partitionToDo是分批去执行某些任务，partitionToQueryAndDo是结合了之前的分批查询某些数据，并且对这些数据进行操作。这些都是可以组合起来的例子。</p>
+<h2 id="结尾">结尾</h2>
+<p>当然，本人也能力有限，也不见得能将大多数的场景进行抽象、组合、归纳，只是觉得在平时的开发中，光写业务光写代码，缺少了自己的思考以及那些优秀的设计思路和理念的话，总归还是无法达到自我提升的程度。本文也只是我在平时工作中的一些小小思考，也还算是一点小小的总结，也仅供大家参考。
+
+  <img src="https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/91468e5a44a14a55b29ad560d44f4b5a~tplv-k3u1fbpfcp-zoom-1.image" alt="">
+
+</p>
+
+
+                
+                
+<div class="entry-shang text-center">
+    
+	    <p> 「如果这篇文章对你有用,请随意打赏」</p>
+	
+	<button class="zs show-zs btn btn-bred">赞赏支持</button>
+</div>
+<div class="zs-modal-bg"></div>
+<div class="zs-modal-box">
+	<div class="zs-modal-head">
+		<button type="button" class="close">×</button>
+		<span class="author"><a href="http://username.github.io/"><img src="/img/favicon.png" />showyool个人博客</a></span>
+        
+	        <p class="tip"><i></i><span>如果这篇文章对你有用,请随意打赏</span></p>
+		
+ 
+	</div>
+	<div class="zs-modal-body">
+		<div class="zs-modal-btns">
+			<button class="btn btn-blink" data-num="2">2元</button>
+			<button class="btn btn-blink" data-num="5">5元</button>
+			<button class="btn btn-blink" data-num="10">10元</button>
+			<button class="btn btn-blink" data-num="50">50元</button>
+			<button class="btn btn-blink" data-num="100">100元</button>
+			<button class="btn btn-blink" data-num="1">任意金额</button>
+		</div>
+		<div class="zs-modal-pay">
+			<button class="btn btn-bred" id="pay-text">2元</button>
+			<p>使用<span id="pay-type">微信</span>扫描二维码完成支付</p>
+			<img src="/img/reward/wechat-2.png"  id="pay-image"/>
+		</div>
+	</div>
+	<div class="zs-modal-footer">
+		<label><input type="radio" name="zs-type" value="wechat" class="zs-type" checked="checked"><span ><span class="zs-wechat"><img src="/img/reward/wechat-btn.png"/></span></label>
+		<label><input type="radio" name="zs-type" value="alipay" class="zs-type" class="zs-alipay"><img src="/img/reward/alipay-btn.png"/></span></label>
+	</div>
+</div>
+<script type="text/javascript" src="/js/reward.js"></script>
+
+                
+
+                <hr>
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/post/6872738517798584328/" data-toggle="tooltip" data-placement="top" title="不是吧，还有人不知道三目运算符的BUG">&larr;
+                            Previous Post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/post/6881281564060155912/" data-toggle="tooltip" data-placement="top" title="可能我这辈子也不会用Guava的Partition了">Next
+                            Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                
+<div id="disqus-comment"></div>
+
+
+
+            </div>
+            
+            <div class="
+                col-lg-11 col-lg-offset-1
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                
+                
+                <section>
+                    <hr class="hidden-sm hidden-xs">
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                        
+                        
+                        
+                        
+                    </div>
+                </section>
+                
+
+                
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                   
+                   <li>
+                       <a href='' rel="alternate" type="application/rss+xml" title="showyool个人博客" >
+                           <span class="fa-stack fa-lg">
+                               <i class="fa fa-circle fa-stack-2x"></i>
+                               <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+                           </span>
+                       </a>
+                   </li>
+                   
+                    
+                    <li>
+                        <a href="mailto:mengyirunian@outlook.com">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		    
+                    
+                    
+                    
+                    
+
+                    
+
+		    
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://github.com/showyool">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+            
+            
+            
+                </ul>
+		<p class="copyright text-muted">
+                    Copyright &copy; showyool个人博客 2020
+                    <br>
+                    <a href="https://themes.gohugo.io/hugo-theme-cleanwhite">CleanWhite Hugo Theme</a> by <a href="https://zhaohuabing.com">Huabing</a> |
+                    <iframe
+                        style="margin-left: 2px; margin-bottom:-5px;"
+                        frameborder="0" scrolling="0" width="100px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=zhaohuabing&repo=hugo-theme-cleanwhite&type=star&count=true" >
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+
+
+
+
+
+<script>
+    
+    if($('#tag_cloud').length !== 0){
+        async("/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+
+<script>
+    async("https://cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+
+
+
+
+</body>
+</html>

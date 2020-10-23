@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    
+    <meta property="og:site_name" content="showyool个人博客">
+    <meta property="og:type" content="article">
+
+    
+    <meta property="og:image" content="http://username.github.io//img/home-bg-jeep.jpg">
+    <meta property="twitter:image" content="http://username.github.io//img/home-bg-jeep.jpg" />
+    
+
+    
+    <meta name="title" content="一次i&#43;&#43;引发的bug" />
+    <meta property="og:title" content="一次i&#43;&#43;引发的bug" />
+    <meta property="twitter:title" content="一次i&#43;&#43;引发的bug" />
+    
+
+    
+    <meta name="description" content="showyool，Java程序员, 杭州，BUG | 这里是 showyool 的博客，与你一起发现更大的世界。">
+    <meta property="og:description" content="showyool，Java程序员, 杭州，BUG | 这里是 showyool 的博客，与你一起发现更大的世界。" />
+    <meta property="twitter:description" content="showyool，Java程序员, 杭州，BUG | 这里是 showyool 的博客，与你一起发现更大的世界。" />
+    
+
+    
+    <meta property="twitter:card" content="summary" />
+    
+    
+
+    <meta name="keyword"  content="showyool, mengyirunian, fuchen, 梦一如年 , 浮沉, showyool的博客, showyool Blog, 博客, 个人网站, 互联网, Web, 云原生, Java, Spring, Kubernetes, 微服务, Dubbo">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>一次i&#43;&#43;引发的bug-shoyool的博客 | showyool Blog</title>
+
+    <link rel="canonical" href="/post/6885187698420613127/">
+
+    <link rel="stylesheet" href="/css/iDisqus.min.css"/>
+	
+    
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    
+    <link rel="stylesheet" href="/css/hux-blog.min.css">
+
+    
+    <link rel="stylesheet" href="/css/zanshang.css">
+    
+    
+    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    
+    
+
+    
+    
+    <script src="/js/jquery.min.js"></script>
+    
+    
+    <script src="/js/bootstrap.min.js"></script>
+    
+    
+    <script src="/js/hux-blog.min.js"></script>
+
+    
+    
+
+</head>
+
+
+
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">showyool个人博客</a>
+        </div>
+
+        
+        
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+                    
+                        
+                        <li>
+                            <a href="/categories/%E5%90%8E%E7%AB%AF">后端</a>
+                        </li>
+                        
+                    
+                    
+		    
+                        <li><a href="/top/about/">简历</a></li>
+                    
+
+                    
+		    <li>
+                        <a href="/search">SEARCH <img src="/img/search.png" height="15" style="cursor: pointer;" alt="Search"></a>
+		    </li>
+                    
+                </ul>
+            </div>
+        </div>
+        
+    </div>
+    
+</nav>
+<script>
+    
+    
+    
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        
+            $navbar.className = " ";
+            
+            setTimeout(function(){
+                
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+
+
+<style type="text/css">
+    header.intro-header {
+        background-image: url('/img/home-bg-jeep.jpg')
+    }
+</style>
+<header class="intro-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                        <a class="tag" href="/tags/java" title="Java">
+                            Java
+                        </a>
+                        
+                    </div>
+                    <h1>一次i&#43;&#43;引发的bug</h1>
+                    <h2 class="subheading"></h2>
+                    <span class="meta">
+                        Posted by 
+                        
+                            showyool
+                         
+                        on 
+                        Monday, October 19, 2020
+                        
+                        
+                        
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+
+
+<article>
+    <div class="container">
+        <div class="row">
+
+            
+            <div class="
+                col-lg-11 col-lg-offset-1
+                col-md-10 col-md-offset-1
+                post-container">
+
+                
+                <header>
+                    <h2>TOC</h2>
+                </header>
+                <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#起因">起因</a></li>
+        <li><a href="#分析">分析</a></li>
+        <li><a href="#代码">代码</a></li>
+        <li><a href="#建模">建模</a></li>
+        <li><a href="#解释">解释</a></li>
+        <li><a href="#延伸一下">延伸一下</a></li>
+        <li><a href="#最后">最后</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+                
+                <p>大家好，作为日常写bug修bug的我，今天给大家带来前几天刚刚修复的一个事故。不得不承认，有我的地方总是会有这么多bug。</p>
+<!-- raw HTML omitted -->
+<h2 id="起因">起因</h2>
+<p>故事的开始发生在前几天，有一个不是很常用的导出功能，被用户反馈出，不管条件是怎么样，导出的数据只有一条，但是实际上根据条件查询是有很多数据，而且页面中也查询出很多数据。（这个问题已经被修复了，所以当时的Kibana日志也找不到了）于是放下手上的工作，投入其中来看这个问题。</p>
+<h2 id="分析">分析</h2>
+<p>从问题的描述中来分析，那么只可能出现在以下情况: <!-- raw HTML omitted --></p>
+<ol>
+<li>根据搜索条件查询出来的记录只有一条。</li>
+<li>对查询出来的数据进行相关业务处理，导致最后的结果只有一条。</li>
+<li>文件导出组件的逻辑处理之后，导致结果只有一条。<!-- raw HTML omitted --></li>
+</ol>
+<p><strong>题外话</strong> <!-- raw HTML omitted -->
+写到了这里，突然想到了一个经典面试题，MQ消息丢失的场景原因分析。哈哈哈，其实大致上也是这么几个角度分析。（有机会来写MQ的文章）<!-- raw HTML omitted -->
+<strong>题外话</strong></p>
+<!-- raw HTML omitted -->
+<p>于是就一个个来分析:</p>
+<ol>
+<li>找到相关业务的SQL以及对应的参数，查询可得，数据不止1条，所以第一种情况可以排除。</li>
+<li>中间业务当中有涉及到相关权限、数据敏感等，将这些都放开之后，还是只有1条数据。</li>
+<li>文件导出组件在接收到数据的时候，打印出的日志也显示只有一条，那么可以说明肯定中间相关业务的逻辑发生了问题。</li>
+</ol>
+<p>由于这段代码都是写在一整个方法里面，导致Arthas排查起来就比较困难，只好一步步设置日志进行排查。（所以，如果是一大段逻辑，建议是拆分成duoge 子方法，一来在写的时候思路明确，有一种模块化的概念，至于方法复用什么的我就不多提了，基本操作；二是一但发生问题，排查起来也会方便点，经验之谈）。<!-- raw HTML omitted -->
+最终定位到一个for循环里面。</p>
+<h2 id="代码">代码</h2>
+<p>话不多说，我们直接来看代码。众所周知，我向来是一个很保护公司代码的人，所以，我在这里又不得不给大家模拟一下了。从问题的情况来看，是导出的对象记录是空</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#ff79c6">import</span> com.google.common.collect.Lists<span style="color:#ff79c6">;</span>
+<span style="color:#ff79c6">import</span> java.util.List<span style="color:#ff79c6">;</span>
+
+<span style="color:#8be9fd;font-style:italic">public</span> <span style="color:#8be9fd;font-style:italic">class</span> <span style="color:#50fa7b">Test</span> <span style="color:#ff79c6">{</span>
+
+    <span style="color:#8be9fd;font-style:italic">public</span> <span style="color:#8be9fd;font-style:italic">static</span> <span style="color:#8be9fd">void</span> <span style="color:#50fa7b">main</span><span style="color:#ff79c6">(</span>String<span style="color:#ff79c6">[]</span> args<span style="color:#ff79c6">)</span> <span style="color:#ff79c6">{</span>
+
+        <span style="color:#6272a4">// 获取Customer数据，这里就简单模拟
+</span><span style="color:#6272a4"></span>        List<span style="color:#ff79c6">&lt;</span>Customer<span style="color:#ff79c6">&gt;</span> customerList <span style="color:#ff79c6">=</span> Lists<span style="color:#ff79c6">.</span><span style="color:#50fa7b">newArrayList</span><span style="color:#ff79c6">(</span><span style="color:#ff79c6">new</span> Customer<span style="color:#ff79c6">(</span><span style="color:#f1fa8c">&#34;Java&#34;</span><span style="color:#ff79c6">),</span> <span style="color:#ff79c6">new</span> Customer<span style="color:#ff79c6">(</span><span style="color:#f1fa8c">&#34;Showyool&#34;</span><span style="color:#ff79c6">),</span> <span style="color:#ff79c6">new</span> Customer<span style="color:#ff79c6">(</span><span style="color:#f1fa8c">&#34;Soga&#34;</span><span style="color:#ff79c6">));</span>
+        <span style="color:#8be9fd">int</span> index <span style="color:#ff79c6">=</span> 0<span style="color:#ff79c6">;</span>
+        String<span style="color:#ff79c6">[][]</span> exportData <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">new</span> String<span style="color:#ff79c6">[</span>customerList<span style="color:#ff79c6">.</span><span style="color:#50fa7b">size</span><span style="color:#ff79c6">()][</span>2<span style="color:#ff79c6">];</span>
+        <span style="color:#ff79c6">for</span> <span style="color:#ff79c6">(</span>Customer customer <span style="color:#ff79c6">:</span> customerList<span style="color:#ff79c6">)</span> <span style="color:#ff79c6">{</span>
+            exportData<span style="color:#ff79c6">[</span>index<span style="color:#ff79c6">][</span>0<span style="color:#ff79c6">]</span> <span style="color:#ff79c6">=</span> String<span style="color:#ff79c6">.</span><span style="color:#50fa7b">valueOf</span><span style="color:#ff79c6">(</span>index<span style="color:#ff79c6">);</span>
+            exportData<span style="color:#ff79c6">[</span>index<span style="color:#ff79c6">][</span>1<span style="color:#ff79c6">]</span> <span style="color:#ff79c6">=</span> customer<span style="color:#ff79c6">.</span><span style="color:#50fa7b">getName</span><span style="color:#ff79c6">();</span>
+            index <span style="color:#ff79c6">=</span> index<span style="color:#ff79c6">++;</span>
+        <span style="color:#ff79c6">}</span>
+        System<span style="color:#ff79c6">.</span><span style="color:#50fa7b">out</span><span style="color:#ff79c6">.</span><span style="color:#50fa7b">println</span><span style="color:#ff79c6">(</span>JSON<span style="color:#ff79c6">.</span><span style="color:#50fa7b">toJSONString</span><span style="color:#ff79c6">(</span>exportData<span style="color:#ff79c6">));</span>
+    <span style="color:#ff79c6">}</span>
+<span style="color:#ff79c6">}</span>
+
+<span style="color:#8be9fd;font-style:italic">class</span> <span style="color:#50fa7b">Customer</span> <span style="color:#ff79c6">{</span>
+
+    <span style="color:#8be9fd;font-style:italic">public</span> <span style="color:#50fa7b">Customer</span><span style="color:#ff79c6">(</span>String name<span style="color:#ff79c6">)</span> <span style="color:#ff79c6">{</span>
+        <span style="color:#ff79c6">this</span><span style="color:#ff79c6">.</span><span style="color:#50fa7b">name</span> <span style="color:#ff79c6">=</span> name<span style="color:#ff79c6">;</span>
+    <span style="color:#ff79c6">}</span>
+
+    <span style="color:#8be9fd;font-style:italic">private</span> String name<span style="color:#ff79c6">;</span>
+
+    <span style="color:#8be9fd;font-style:italic">public</span> String <span style="color:#50fa7b">getName</span><span style="color:#ff79c6">()</span> <span style="color:#ff79c6">{</span>
+        <span style="color:#ff79c6">return</span> name<span style="color:#ff79c6">;</span>
+    <span style="color:#ff79c6">}</span>
+
+    <span style="color:#8be9fd;font-style:italic">public</span> <span style="color:#8be9fd">void</span> <span style="color:#50fa7b">setName</span><span style="color:#ff79c6">(</span>String name<span style="color:#ff79c6">)</span> <span style="color:#ff79c6">{</span>
+        <span style="color:#ff79c6">this</span><span style="color:#ff79c6">.</span><span style="color:#50fa7b">name</span> <span style="color:#ff79c6">=</span> name<span style="color:#ff79c6">;</span>
+    <span style="color:#ff79c6">}</span>
+<span style="color:#ff79c6">}</span>
+</code></pre></div><p>这段代码看起来好像也没什么的，就是将Customer集合转换成一个字符串二维数组。但是输出结果显示:
+
+  <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/8cb6af20ea234441b8a33dbc38ef0f15~tplv-k3u1fbpfcp-watermark.image" alt="">
+
+
+这就符合我们说的，查询出来有多条，但是输出只有1条。 <!-- raw HTML omitted -->
+仔细观察一下，我们可以发现，输出的数据显示都是最后一条，也就是说，Customer这个集合每次遍历的时候，都是后者将前者进行覆盖，也就是说，这个index的下标一直没有变化过，一直是0。</p>
+<h2 id="建模">建模</h2>
+<p>这样看来，我们的这个自增确实有点问题，那么我们再简单来写一个模型</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#8be9fd;font-style:italic">public</span> <span style="color:#8be9fd;font-style:italic">class</span> <span style="color:#50fa7b">Test2</span> <span style="color:#ff79c6">{</span>
+
+    <span style="color:#8be9fd;font-style:italic">public</span> <span style="color:#8be9fd;font-style:italic">static</span> <span style="color:#8be9fd">void</span> <span style="color:#50fa7b">main</span><span style="color:#ff79c6">(</span>String<span style="color:#ff79c6">[]</span> args<span style="color:#ff79c6">)</span> <span style="color:#ff79c6">{</span>
+        <span style="color:#8be9fd">int</span> index <span style="color:#ff79c6">=</span> 3<span style="color:#ff79c6">;</span>
+        index <span style="color:#ff79c6">=</span> index<span style="color:#ff79c6">++;</span>
+        System<span style="color:#ff79c6">.</span><span style="color:#50fa7b">out</span><span style="color:#ff79c6">.</span><span style="color:#50fa7b">println</span><span style="color:#ff79c6">(</span>index<span style="color:#ff79c6">);</span>
+    <span style="color:#ff79c6">}</span>
+    
+<span style="color:#ff79c6">}</span>
+</code></pre></div><p>我们将上面的业务逻辑简化成这样一个模型，那么这个结果毫无意外的是3。</p>
+<h2 id="解释">解释</h2>
+<p>那么我们执行一下javap，看看JVM字节码是如何解释：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">javap <span style="color:#ff79c6">-</span>c Test2
+
+Compiled from <span style="color:#f1fa8c">&#34;Test2.java&#34;</span>
+<span style="color:#8be9fd;font-style:italic">public</span> <span style="color:#8be9fd;font-style:italic">class</span> <span style="color:#50fa7b">com</span><span style="color:#ff79c6">.</span><span style="color:#50fa7b">showyool</span><span style="color:#ff79c6">.</span><span style="color:#50fa7b">blog_4</span><span style="color:#ff79c6">.</span><span style="color:#50fa7b">Test2</span> <span style="color:#ff79c6">{</span>
+  <span style="color:#8be9fd;font-style:italic">public</span> com<span style="color:#ff79c6">.</span><span style="color:#50fa7b">showyool</span><span style="color:#ff79c6">.</span><span style="color:#50fa7b">blog_4</span><span style="color:#ff79c6">.</span><span style="color:#50fa7b">Test2</span><span style="color:#ff79c6">();</span>
+    Code<span style="color:#ff79c6">:</span>
+       0<span style="color:#ff79c6">:</span> aload_0
+       1<span style="color:#ff79c6">:</span> invokespecial #1                  <span style="color:#6272a4">// Method java/lang/Object.&#34;&lt;init&gt;&#34;:()V
+</span><span style="color:#6272a4"></span>       4<span style="color:#ff79c6">:</span> <span style="color:#ff79c6">return</span>
+
+  <span style="color:#8be9fd;font-style:italic">public</span> <span style="color:#8be9fd;font-style:italic">static</span> <span style="color:#8be9fd">void</span> <span style="color:#50fa7b">main</span><span style="color:#ff79c6">(</span>java<span style="color:#ff79c6">.</span><span style="color:#50fa7b">lang</span><span style="color:#ff79c6">.</span><span style="color:#50fa7b">String</span><span style="color:#ff79c6">[]);</span>
+    Code<span style="color:#ff79c6">:</span>
+       0<span style="color:#ff79c6">:</span> iconst_3
+       1<span style="color:#ff79c6">:</span> istore_1
+       2<span style="color:#ff79c6">:</span> iload_1
+       3<span style="color:#ff79c6">:</span> iinc          1<span style="color:#ff79c6">,</span> 1
+       6<span style="color:#ff79c6">:</span> istore_1
+       7<span style="color:#ff79c6">:</span> getstatic     #2                  <span style="color:#6272a4">// Field java/lang/System.out:Ljava/io/PrintStream;
+</span><span style="color:#6272a4"></span>      10<span style="color:#ff79c6">:</span> iload_1
+      11<span style="color:#ff79c6">:</span> invokevirtual #3                  <span style="color:#6272a4">// Method java/io/PrintStream.println:(I)V
+</span><span style="color:#6272a4"></span>      14<span style="color:#ff79c6">:</span> <span style="color:#ff79c6">return</span>
+<span style="color:#ff79c6">}</span>
+
+</code></pre></div><p>这里我简单讲一下这里的JVM字节码指令（后面有机会再详细写写文章）<!-- raw HTML omitted -->
+首先我们需要先知道这里存在两个概念，操作数栈和局部变量表，这两者是存在虚拟机栈当中栈帧（stack frame)当中的一些数据结构，如图:</p>
+<!-- raw HTML omitted -->
+<h2 id="延伸一下">延伸一下</h2>
+<p>这样一来，我们发现，问题其实出在最后一步，在进行运算之后，又将原先栈中记录的值重新赋给变量，覆盖掉了
+如果我们这样写:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#8be9fd;font-style:italic">public</span> <span style="color:#8be9fd;font-style:italic">class</span> <span style="color:#50fa7b">Test2</span> <span style="color:#ff79c6">{</span>
+
+    <span style="color:#8be9fd;font-style:italic">public</span> <span style="color:#8be9fd;font-style:italic">static</span> <span style="color:#8be9fd">void</span> <span style="color:#50fa7b">main</span><span style="color:#ff79c6">(</span>String<span style="color:#ff79c6">[]</span> args<span style="color:#ff79c6">)</span> <span style="color:#ff79c6">{</span>
+        <span style="color:#8be9fd">int</span> index <span style="color:#ff79c6">=</span> 3<span style="color:#ff79c6">;</span>
+        index<span style="color:#ff79c6">++;</span>
+        System<span style="color:#ff79c6">.</span><span style="color:#50fa7b">out</span><span style="color:#ff79c6">.</span><span style="color:#50fa7b">println</span><span style="color:#ff79c6">(</span>index<span style="color:#ff79c6">);</span>
+    <span style="color:#ff79c6">}</span>
+
+<span style="color:#ff79c6">}</span>
+
+Compiled from <span style="color:#f1fa8c">&#34;Test2.java&#34;</span>
+<span style="color:#8be9fd;font-style:italic">public</span> <span style="color:#8be9fd;font-style:italic">class</span> <span style="color:#50fa7b">com</span><span style="color:#ff79c6">.</span><span style="color:#50fa7b">showyool</span><span style="color:#ff79c6">.</span><span style="color:#50fa7b">blog_4</span><span style="color:#ff79c6">.</span><span style="color:#50fa7b">Test2</span> <span style="color:#ff79c6">{</span>
+  <span style="color:#8be9fd;font-style:italic">public</span> com<span style="color:#ff79c6">.</span><span style="color:#50fa7b">showyool</span><span style="color:#ff79c6">.</span><span style="color:#50fa7b">blog_4</span><span style="color:#ff79c6">.</span><span style="color:#50fa7b">Test2</span><span style="color:#ff79c6">();</span>
+    Code<span style="color:#ff79c6">:</span>
+       0<span style="color:#ff79c6">:</span> aload_0
+       1<span style="color:#ff79c6">:</span> invokespecial #1                  <span style="color:#6272a4">// Method java/lang/Object.&#34;&lt;init&gt;&#34;:()V
+</span><span style="color:#6272a4"></span>       4<span style="color:#ff79c6">:</span> <span style="color:#ff79c6">return</span>
+
+  <span style="color:#8be9fd;font-style:italic">public</span> <span style="color:#8be9fd;font-style:italic">static</span> <span style="color:#8be9fd">void</span> <span style="color:#50fa7b">main</span><span style="color:#ff79c6">(</span>java<span style="color:#ff79c6">.</span><span style="color:#50fa7b">lang</span><span style="color:#ff79c6">.</span><span style="color:#50fa7b">String</span><span style="color:#ff79c6">[]);</span>
+    Code<span style="color:#ff79c6">:</span>
+       0<span style="color:#ff79c6">:</span> iconst_3
+       1<span style="color:#ff79c6">:</span> istore_1
+       2<span style="color:#ff79c6">:</span> iinc          1<span style="color:#ff79c6">,</span> 1
+       5<span style="color:#ff79c6">:</span> getstatic     #2                  <span style="color:#6272a4">// Field java/lang/System.out:Ljava/io/PrintStream;
+</span><span style="color:#6272a4"></span>       8<span style="color:#ff79c6">:</span> iload_1
+       9<span style="color:#ff79c6">:</span> invokevirtual #3                  <span style="color:#6272a4">// Method java/io/PrintStream.println:(I)V
+</span><span style="color:#6272a4"></span>      12<span style="color:#ff79c6">:</span> <span style="color:#ff79c6">return</span>
+<span style="color:#ff79c6">}</span>
+</code></pre></div><p>可以发现，这里就没有最后一步的istore_1，那么在iinc之后，index的值就变成我们预想的4。<!-- raw HTML omitted -->
+还有一种情况，我们来看看:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#8be9fd;font-style:italic">public</span> <span style="color:#8be9fd;font-style:italic">class</span> <span style="color:#50fa7b">Test2</span> <span style="color:#ff79c6">{</span>
+
+    <span style="color:#8be9fd;font-style:italic">public</span> <span style="color:#8be9fd;font-style:italic">static</span> <span style="color:#8be9fd">void</span> <span style="color:#50fa7b">main</span><span style="color:#ff79c6">(</span>String<span style="color:#ff79c6">[]</span> args<span style="color:#ff79c6">)</span> <span style="color:#ff79c6">{</span>
+        <span style="color:#8be9fd">int</span> index <span style="color:#ff79c6">=</span> 3<span style="color:#ff79c6">;</span>
+        index <span style="color:#ff79c6">=</span> index <span style="color:#ff79c6">+</span> 2<span style="color:#ff79c6">;</span>
+        System<span style="color:#ff79c6">.</span><span style="color:#50fa7b">out</span><span style="color:#ff79c6">.</span><span style="color:#50fa7b">println</span><span style="color:#ff79c6">(</span>index<span style="color:#ff79c6">);</span>
+    <span style="color:#ff79c6">}</span>
+
+<span style="color:#ff79c6">}</span>
+
+Compiled from <span style="color:#f1fa8c">&#34;Test2.java&#34;</span>
+<span style="color:#8be9fd;font-style:italic">public</span> <span style="color:#8be9fd;font-style:italic">class</span> <span style="color:#50fa7b">com</span><span style="color:#ff79c6">.</span><span style="color:#50fa7b">showyool</span><span style="color:#ff79c6">.</span><span style="color:#50fa7b">blog_4</span><span style="color:#ff79c6">.</span><span style="color:#50fa7b">Test2</span> <span style="color:#ff79c6">{</span>
+  <span style="color:#8be9fd;font-style:italic">public</span> com<span style="color:#ff79c6">.</span><span style="color:#50fa7b">showyool</span><span style="color:#ff79c6">.</span><span style="color:#50fa7b">blog_4</span><span style="color:#ff79c6">.</span><span style="color:#50fa7b">Test2</span><span style="color:#ff79c6">();</span>
+    Code<span style="color:#ff79c6">:</span>
+       0<span style="color:#ff79c6">:</span> aload_0
+       1<span style="color:#ff79c6">:</span> invokespecial #1                  <span style="color:#6272a4">// Method java/lang/Object.&#34;&lt;init&gt;&#34;:()V
+</span><span style="color:#6272a4"></span>       4<span style="color:#ff79c6">:</span> <span style="color:#ff79c6">return</span>
+
+  <span style="color:#8be9fd;font-style:italic">public</span> <span style="color:#8be9fd;font-style:italic">static</span> <span style="color:#8be9fd">void</span> <span style="color:#50fa7b">main</span><span style="color:#ff79c6">(</span>java<span style="color:#ff79c6">.</span><span style="color:#50fa7b">lang</span><span style="color:#ff79c6">.</span><span style="color:#50fa7b">String</span><span style="color:#ff79c6">[]);</span>
+    Code<span style="color:#ff79c6">:</span>
+       0<span style="color:#ff79c6">:</span> iconst_3
+       1<span style="color:#ff79c6">:</span> istore_1
+       2<span style="color:#ff79c6">:</span> iload_1
+       3<span style="color:#ff79c6">:</span> iconst_2
+       4<span style="color:#ff79c6">:</span> iadd
+       5<span style="color:#ff79c6">:</span> istore_1
+       6<span style="color:#ff79c6">:</span> getstatic     #2                  <span style="color:#6272a4">// Field java/lang/System.out:Ljava/io/PrintStream;
+</span><span style="color:#6272a4"></span>       9<span style="color:#ff79c6">:</span> iload_1
+      10<span style="color:#ff79c6">:</span> invokevirtual #3                  <span style="color:#6272a4">// Method java/io/PrintStream.println:(I)V
+</span><span style="color:#6272a4"></span>      13<span style="color:#ff79c6">:</span> <span style="color:#ff79c6">return</span>
+<span style="color:#ff79c6">}</span>
+
+</code></pre></div><p>0: iconst_3 (先将常量3压入栈) <!-- raw HTML omitted -->
+1: istore_1 (出栈操作，将值赋给第一个参数，也就是将3赋值给index) <!-- raw HTML omitted -->
+2: iload_1  (将第一个参数的值压入栈，也就是将3入栈，此时栈顶的值为3) <!-- raw HTML omitted -->
+3: iconst_2 (将常量2压入栈, 此时栈顶的值为2，2在3之上) <!-- raw HTML omitted -->
+4: iadd (将栈顶的两个数进行相加，并将结果压入栈。2+3=5，此时栈顶的值为5) <!-- raw HTML omitted -->
+5: istore_1 (出栈操作，将值赋给第一个参数，也就是将5赋值给index) <!-- raw HTML omitted --></p>
+<p>看到这里各位观众老爷肯定会有这么一个疑惑，为什么这里的iadd加法操作之后，会影响栈里面的数据，而先前说的iinc不是在栈里面操作？好的吧，我们可以看看JVM虚拟机规范当中，它是这么描述的:</p>
+<blockquote>
+<p>指令iinc对给定的局部变量做自增操作，这条指令是少数几个执行过程中完全不修改操作数栈的指令。它接收两个操作数：
+第1个局部变量表的位置，第2个位累加数。比如常见的i++,就会产生这条指令</p>
+</blockquote>
+<p>看到这里，我们知道，对于一般的加法操作之后复制没啥问题，但是使用i++之后，那么此时栈顶的数还是之前的旧值，如果此刻进行赋值就会回到原来的旧值，因为它并没有修改栈里面的数据。所以先前那个bug，只需要进行自增不赋值就可以修复了。
+<!-- raw HTML omitted --></p>
+<!-- raw HTML omitted -->
+<h2 id="最后">最后</h2>
+<p>感谢各位能够看到这里，以上就是我处理这个bug的全部过程。虽然这只是一个小bug，但是这一个小小的bug还是值得学习和思考的。今后还会继续分享我所发现的bug以及知识点，如果我的文章对你有所帮助，还希望各位大佬$\color{red}{点个关注}$$\color{red}{点个赞}$，再次感谢大家的支持！<!-- raw HTML omitted -->
+这里也附上我的Github地址:https://github.com/showyool/juejin.git</p>
+
+
+                
+                
+<div class="entry-shang text-center">
+    
+	    <p> 「如果这篇文章对你有用,请随意打赏」</p>
+	
+	<button class="zs show-zs btn btn-bred">赞赏支持</button>
+</div>
+<div class="zs-modal-bg"></div>
+<div class="zs-modal-box">
+	<div class="zs-modal-head">
+		<button type="button" class="close">×</button>
+		<span class="author"><a href="http://username.github.io/"><img src="/img/favicon.png" />showyool个人博客</a></span>
+        
+	        <p class="tip"><i></i><span>如果这篇文章对你有用,请随意打赏</span></p>
+		
+ 
+	</div>
+	<div class="zs-modal-body">
+		<div class="zs-modal-btns">
+			<button class="btn btn-blink" data-num="2">2元</button>
+			<button class="btn btn-blink" data-num="5">5元</button>
+			<button class="btn btn-blink" data-num="10">10元</button>
+			<button class="btn btn-blink" data-num="50">50元</button>
+			<button class="btn btn-blink" data-num="100">100元</button>
+			<button class="btn btn-blink" data-num="1">任意金额</button>
+		</div>
+		<div class="zs-modal-pay">
+			<button class="btn btn-bred" id="pay-text">2元</button>
+			<p>使用<span id="pay-type">微信</span>扫描二维码完成支付</p>
+			<img src="/img/reward/wechat-2.png"  id="pay-image"/>
+		</div>
+	</div>
+	<div class="zs-modal-footer">
+		<label><input type="radio" name="zs-type" value="wechat" class="zs-type" checked="checked"><span ><span class="zs-wechat"><img src="/img/reward/wechat-btn.png"/></span></label>
+		<label><input type="radio" name="zs-type" value="alipay" class="zs-type" class="zs-alipay"><img src="/img/reward/alipay-btn.png"/></span></label>
+	</div>
+</div>
+<script type="text/javascript" src="/js/reward.js"></script>
+
+                
+
+                <hr>
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/post/6881281564060155912/" data-toggle="tooltip" data-placement="top" title="可能我这辈子也不会用Guava的Partition了">&larr;
+                            Previous Post</a>
+                    </li>
+                    
+                    
+                </ul>
+
+                
+<div id="disqus-comment"></div>
+
+
+
+            </div>
+            
+            <div class="
+                col-lg-11 col-lg-offset-1
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                
+                
+                <section>
+                    <hr class="hidden-sm hidden-xs">
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                        
+                        
+                        
+                        
+                    </div>
+                </section>
+                
+
+                
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                   
+                   <li>
+                       <a href='' rel="alternate" type="application/rss+xml" title="showyool个人博客" >
+                           <span class="fa-stack fa-lg">
+                               <i class="fa fa-circle fa-stack-2x"></i>
+                               <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+                           </span>
+                       </a>
+                   </li>
+                   
+                    
+                    <li>
+                        <a href="mailto:mengyirunian@outlook.com">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		    
+                    
+                    
+                    
+                    
+
+                    
+
+		    
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://github.com/showyool">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+            
+            
+            
+                </ul>
+		<p class="copyright text-muted">
+                    Copyright &copy; showyool个人博客 2020
+                    <br>
+                    <a href="https://themes.gohugo.io/hugo-theme-cleanwhite">CleanWhite Hugo Theme</a> by <a href="https://zhaohuabing.com">Huabing</a> |
+                    <iframe
+                        style="margin-left: 2px; margin-bottom:-5px;"
+                        frameborder="0" scrolling="0" width="100px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=zhaohuabing&repo=hugo-theme-cleanwhite&type=star&count=true" >
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+
+
+
+
+
+<script>
+    
+    if($('#tag_cloud').length !== 0){
+        async("/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+
+<script>
+    async("https://cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+
+
+
+
+</body>
+</html>

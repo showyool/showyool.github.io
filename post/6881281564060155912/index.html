@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    
+    <meta property="og:site_name" content="showyool个人博客">
+    <meta property="og:type" content="article">
+
+    
+    <meta property="og:image" content="http://username.github.io//img/home-bg-jeep.jpg">
+    <meta property="twitter:image" content="http://username.github.io//img/home-bg-jeep.jpg" />
+    
+
+    
+    <meta name="title" content="可能我这辈子也不会用Guava的Partition了" />
+    <meta property="og:title" content="可能我这辈子也不会用Guava的Partition了" />
+    <meta property="twitter:title" content="可能我这辈子也不会用Guava的Partition了" />
+    
+
+    
+    <meta name="description" content="showyool，Java程序员, 杭州，BUG | 这里是 showyool 的博客，与你一起发现更大的世界。">
+    <meta property="og:description" content="showyool，Java程序员, 杭州，BUG | 这里是 showyool 的博客，与你一起发现更大的世界。" />
+    <meta property="twitter:description" content="showyool，Java程序员, 杭州，BUG | 这里是 showyool 的博客，与你一起发现更大的世界。" />
+    
+
+    
+    <meta property="twitter:card" content="summary" />
+    
+    
+
+    <meta name="keyword"  content="showyool, mengyirunian, fuchen, 梦一如年 , 浮沉, showyool的博客, showyool Blog, 博客, 个人网站, 互联网, Web, 云原生, Java, Spring, Kubernetes, 微服务, Dubbo">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>可能我这辈子也不会用Guava的Partition了-shoyool的博客 | showyool Blog</title>
+
+    <link rel="canonical" href="/post/6881281564060155912/">
+
+    <link rel="stylesheet" href="/css/iDisqus.min.css"/>
+	
+    
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    
+    <link rel="stylesheet" href="/css/hux-blog.min.css">
+
+    
+    <link rel="stylesheet" href="/css/zanshang.css">
+    
+    
+    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    
+    
+
+    
+    
+    <script src="/js/jquery.min.js"></script>
+    
+    
+    <script src="/js/bootstrap.min.js"></script>
+    
+    
+    <script src="/js/hux-blog.min.js"></script>
+
+    
+    
+
+</head>
+
+
+
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">showyool个人博客</a>
+        </div>
+
+        
+        
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+                    
+                        
+                        <li>
+                            <a href="/categories/%E5%90%8E%E7%AB%AF">后端</a>
+                        </li>
+                        
+                    
+                    
+		    
+                        <li><a href="/top/about/">简历</a></li>
+                    
+
+                    
+		    <li>
+                        <a href="/search">SEARCH <img src="/img/search.png" height="15" style="cursor: pointer;" alt="Search"></a>
+		    </li>
+                    
+                </ul>
+            </div>
+        </div>
+        
+    </div>
+    
+</nav>
+<script>
+    
+    
+    
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        
+            $navbar.className = " ";
+            
+            setTimeout(function(){
+                
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+
+
+<style type="text/css">
+    header.intro-header {
+        background-image: url('/img/home-bg-jeep.jpg')
+    }
+</style>
+<header class="intro-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                    </div>
+                    <h1>可能我这辈子也不会用Guava的Partition了</h1>
+                    <h2 class="subheading"></h2>
+                    <span class="meta">
+                        Posted by 
+                        
+                            showyool
+                         
+                        on 
+                        Thursday, October 8, 2020
+                        
+                        
+                        
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+
+
+<article>
+    <div class="container">
+        <div class="row">
+
+            
+            <div class="
+                col-lg-11 col-lg-offset-1
+                col-md-10 col-md-offset-1
+                post-container">
+
+                
+                <header>
+                    <h2>TOC</h2>
+                </header>
+                <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#又写bug了">又写BUG了</a></li>
+        <li><a href="#故事的开始">故事的开始</a></li>
+        <li><a href="#常见的nosuchelementexception原因">常见的NoSuchElementException原因</a></li>
+        <li><a href="#回归主线">回归主线</a></li>
+        <li><a href="#增强的for循环">增强的for循环</a></li>
+        <li><a href="#继续回归主线">继续回归主线</a></li>
+        <li><a href="#总结">总结</a></li>
+        <li><a href="#解决">解决</a></li>
+        <li><a href="#最后">最后</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+                
+                <h2 id="又写bug了">又写BUG了</h2>
+<p>上回书说道，我写的《<a href="https://juejin.im/post/6875124307605864461">这可能是你从未见过如此优雅的写法</a>》里面的方法是为了将非业务和业务逻辑进行解耦出来，于是周围小伙伴觉得不错也都开始使用起来，这颇让人感到很有成就感。于是大家都开始纷纷使用起来。既然话已经说到了这里，想必各位也已经知道接下来肯定是搞出了bug。
+
+  <img src="https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/c81cfcb0b27145bda36e80dce9fd0077~tplv-k3u1fbpfcp-zoom-1.image" alt="">
+
+</p>
+<h2 id="故事的开始">故事的开始</h2>
+<p>有一天，突然有个小伙伴说，有一个查询商品的dubbo接口报了NoSuchElementException的错误，然后在kibana的堆栈日志这边看到的是我之前提供的那个公共方法的一行，这就引起了我的注意
+
+  <img src="https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/27678fee451148c5860ba0d52c1f8028~tplv-k3u1fbpfcp-zoom-1.image" alt="">
+
+
+那么我们来看看这是在哪一行
+
+  <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/018b427c74a74e70b3f490b397f7cb99~tplv-k3u1fbpfcp-zoom-1.image" alt="">
+
+</p>
+<h2 id="常见的nosuchelementexception原因">常见的NoSuchElementException原因</h2>
+<p>NoSuchElementException这个错误是不是十分眼熟？没错，各位有心的话，在网上会搜到很多这种错误，无非就是在循环迭代中多次使用了next()的原因，例如:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">List<span style="color:#ff79c6">&lt;</span>String<span style="color:#ff79c6">&gt;</span> list <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">new</span> ArrayList<span style="color:#ff79c6">&lt;&gt;();</span>
+list<span style="color:#ff79c6">.</span><span style="color:#50fa7b">add</span><span style="color:#ff79c6">(</span><span style="color:#f1fa8c">&#34;wo&#34;</span><span style="color:#ff79c6">);</span>
+list<span style="color:#ff79c6">.</span><span style="color:#50fa7b">add</span><span style="color:#ff79c6">(</span><span style="color:#f1fa8c">&#34;ni&#34;</span><span style="color:#ff79c6">);</span>
+list<span style="color:#ff79c6">.</span><span style="color:#50fa7b">add</span><span style="color:#ff79c6">(</span><span style="color:#f1fa8c">&#34;ta&#34;</span><span style="color:#ff79c6">);</span>
+System<span style="color:#ff79c6">.</span><span style="color:#50fa7b">out</span><span style="color:#ff79c6">.</span><span style="color:#50fa7b">println</span><span style="color:#ff79c6">(</span>list<span style="color:#ff79c6">);</span>
+Iterator<span style="color:#ff79c6">&lt;</span>String<span style="color:#ff79c6">&gt;</span> iterator <span style="color:#ff79c6">=</span> list<span style="color:#ff79c6">.</span><span style="color:#50fa7b">iterator</span><span style="color:#ff79c6">();</span>
+<span style="color:#ff79c6">while</span> <span style="color:#ff79c6">(</span>iterator<span style="color:#ff79c6">.</span><span style="color:#50fa7b">hasNext</span><span style="color:#ff79c6">())</span> <span style="color:#ff79c6">{</span>
+     iterator<span style="color:#ff79c6">.</span><span style="color:#50fa7b">next</span><span style="color:#ff79c6">();</span>
+     System<span style="color:#ff79c6">.</span><span style="color:#50fa7b">out</span><span style="color:#ff79c6">.</span><span style="color:#50fa7b">println</span><span style="color:#ff79c6">(</span>iterator<span style="color:#ff79c6">.</span><span style="color:#50fa7b">next</span><span style="color:#ff79c6">());</span>
+<span style="color:#ff79c6">}</span>
+</code></pre></div><p>
+  <img src="https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/97c0a208ca4341348db25c4f48bf5612~tplv-k3u1fbpfcp-zoom-1.image" alt="">
+
+
+我们可以深入一下看看这个ArrayList里面的第862行（本人使用的JDK版本为1.8.181，不同版本之间的行数可能不一样）
+
+  <img src="https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/1cbedcb4b95748f7a1084695ef856082~tplv-k3u1fbpfcp-zoom-1.image" alt="">
+
+
+可以看到这里在执行next()方法的时候，会进行游标数的检查。可以发现，在上面的例子中，由于每次for循环当中多执行了一次next()，使得每次循环的游标移动了两次，所以就会造成这个问题。具体的各位可以自己DEBUG看看。<!-- raw HTML omitted --></p>
+<h2 id="回归主线">回归主线</h2>
+<p>那么，这次的原因是不是也是这个地方发生的呢，由于公司政策要求，我这边就不方便贴出相关的业务代码（这可是要被开除的），但是这边也没有使用迭代器的循环写法，而是用了简单的增强for循环，也就不会出现像上面的多次调用next()的情况。<!-- raw HTML omitted -->
+于是只好本地进行模拟:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#8be9fd;font-style:italic">public</span> <span style="color:#8be9fd;font-style:italic">static</span> <span style="color:#8be9fd">void</span> <span style="color:#50fa7b">main</span><span style="color:#ff79c6">(</span>String<span style="color:#ff79c6">[]</span> args<span style="color:#ff79c6">)</span> <span style="color:#ff79c6">{</span>
+    List<span style="color:#ff79c6">&lt;</span>String<span style="color:#ff79c6">&gt;</span> all <span style="color:#ff79c6">=</span> Lists<span style="color:#ff79c6">.</span><span style="color:#50fa7b">newArrayList</span><span style="color:#ff79c6">(</span><span style="color:#f1fa8c">&#34;ki1&#34;</span><span style="color:#ff79c6">);</span>
+    Map<span style="color:#ff79c6">&lt;</span>String<span style="color:#ff79c6">,</span> Object<span style="color:#ff79c6">&gt;</span> map <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">new</span> CommonDoPartition<span style="color:#ff79c6">&lt;&gt;().</span><span style="color:#50fa7b">partitionToQuery4Map</span><span style="color:#ff79c6">(</span>500<span style="color:#ff79c6">,</span> all<span style="color:#ff79c6">,</span> outerIds <span style="color:#ff79c6">-&gt;</span> returnMap<span style="color:#ff79c6">(</span>outerIds<span style="color:#ff79c6">));</span>
+    System<span style="color:#ff79c6">.</span><span style="color:#50fa7b">out</span><span style="color:#ff79c6">.</span><span style="color:#50fa7b">println</span><span style="color:#ff79c6">(</span>JSON<span style="color:#ff79c6">.</span><span style="color:#50fa7b">toJSONString</span><span style="color:#ff79c6">(</span>map<span style="color:#ff79c6">));</span>
+<span style="color:#ff79c6">}</span>
+
+<span style="color:#8be9fd;font-style:italic">public</span> <span style="color:#8be9fd;font-style:italic">static</span> Map<span style="color:#ff79c6">&lt;</span>String<span style="color:#ff79c6">,</span> Object<span style="color:#ff79c6">&gt;</span> <span style="color:#50fa7b">returnMap</span><span style="color:#ff79c6">(</span>List<span style="color:#ff79c6">&lt;</span>String<span style="color:#ff79c6">&gt;</span> all<span style="color:#ff79c6">)</span> <span style="color:#ff79c6">{</span>
+    Map<span style="color:#ff79c6">&lt;</span>String<span style="color:#ff79c6">,</span> Object<span style="color:#ff79c6">&gt;</span> map <span style="color:#ff79c6">=</span> Maps<span style="color:#ff79c6">.</span><span style="color:#50fa7b">newHashMap</span><span style="color:#ff79c6">();</span>
+    map<span style="color:#ff79c6">.</span><span style="color:#50fa7b">put</span><span style="color:#ff79c6">(</span><span style="color:#f1fa8c">&#34;ki1&#34;</span><span style="color:#ff79c6">,</span> <span style="color:#f1fa8c">&#34;ki1&#34;</span><span style="color:#ff79c6">);</span>
+    <span style="color:#ff79c6">return</span> map<span style="color:#ff79c6">;</span>
+<span style="color:#ff79c6">}</span>
+</code></pre></div><p>运行之后发现，并没有报错。
+
+  <img src="https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/3ea2833b9f9d4aae9d18dc0e42023b9c~tplv-k3u1fbpfcp-zoom-1.image" alt="">
+
+
+这可真的是吓坏本宝宝了。
+
+  <img src="https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/4a7516a91f7a459f9ebeb145d170dbb1~tplv-k3u1fbpfcp-zoom-1.image" alt="">
+
+
+在那个出错的代码当中，也只是在lambda表达式中调用一个业务方法。其他的部分完全一致，那么根据控制变量法（当然，运行的机器、容器、环境等这些暂时先不考虑），是不是出问题的地方在于这个业务代码呢，于是拉着小伙伴看了下这里面的业务逻辑。果真，发现了一些端倪。在这里业务代码中，有对这个入参的all进行过删减，于是我也进行一波小小的测试:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#8be9fd;font-style:italic">public</span> <span style="color:#8be9fd;font-style:italic">static</span> <span style="color:#8be9fd">void</span> <span style="color:#50fa7b">main</span><span style="color:#ff79c6">(</span>String<span style="color:#ff79c6">[]</span> args<span style="color:#ff79c6">)</span> <span style="color:#ff79c6">{</span>
+    List<span style="color:#ff79c6">&lt;</span>String<span style="color:#ff79c6">&gt;</span> all <span style="color:#ff79c6">=</span> Lists<span style="color:#ff79c6">.</span><span style="color:#50fa7b">newArrayList</span><span style="color:#ff79c6">(</span><span style="color:#f1fa8c">&#34;ki1&#34;</span><span style="color:#ff79c6">);</span>
+    Map<span style="color:#ff79c6">&lt;</span>String<span style="color:#ff79c6">,</span> Object<span style="color:#ff79c6">&gt;</span> map <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">new</span> CommonDoPartition<span style="color:#ff79c6">&lt;&gt;().</span><span style="color:#50fa7b">partitionToQuery4Map</span><span style="color:#ff79c6">(</span>500<span style="color:#ff79c6">,</span> all<span style="color:#ff79c6">,</span> outerIds <span style="color:#ff79c6">-&gt;</span> returnMap<span style="color:#ff79c6">(</span>outerIds<span style="color:#ff79c6">));</span>
+    System<span style="color:#ff79c6">.</span><span style="color:#50fa7b">out</span><span style="color:#ff79c6">.</span><span style="color:#50fa7b">println</span><span style="color:#ff79c6">(</span>JSON<span style="color:#ff79c6">.</span><span style="color:#50fa7b">toJSONString</span><span style="color:#ff79c6">(</span>map<span style="color:#ff79c6">));</span>
+<span style="color:#ff79c6">}</span>
+
+<span style="color:#8be9fd;font-style:italic">public</span> <span style="color:#8be9fd;font-style:italic">static</span> Map<span style="color:#ff79c6">&lt;</span>String<span style="color:#ff79c6">,</span> Object<span style="color:#ff79c6">&gt;</span> <span style="color:#50fa7b">returnMap</span><span style="color:#ff79c6">(</span>List<span style="color:#ff79c6">&lt;</span>String<span style="color:#ff79c6">&gt;</span> all<span style="color:#ff79c6">)</span> <span style="color:#ff79c6">{</span>
+    Map<span style="color:#ff79c6">&lt;</span>String<span style="color:#ff79c6">,</span> Object<span style="color:#ff79c6">&gt;</span> map <span style="color:#ff79c6">=</span> Maps<span style="color:#ff79c6">.</span><span style="color:#50fa7b">newHashMap</span><span style="color:#ff79c6">();</span>
+    all<span style="color:#ff79c6">.</span><span style="color:#50fa7b">remove</span><span style="color:#ff79c6">(</span><span style="color:#f1fa8c">&#34;ki1&#34;</span><span style="color:#ff79c6">);</span>
+    map<span style="color:#ff79c6">.</span><span style="color:#50fa7b">put</span><span style="color:#ff79c6">(</span><span style="color:#f1fa8c">&#34;ki1&#34;</span><span style="color:#ff79c6">,</span> <span style="color:#f1fa8c">&#34;ki1&#34;</span><span style="color:#ff79c6">);</span>
+    <span style="color:#ff79c6">return</span> map<span style="color:#ff79c6">;</span>
+<span style="color:#ff79c6">}</span>
+</code></pre></div><p>果然报了这个错误，这个和kibana上面的错误是一样的。
+
+  <img src="https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/7e9a7af2f471478f840692135104623e~tplv-k3u1fbpfcp-zoom-1.image" alt="">
+
+
+那么接下来我们来深入一下代码，为什么会发生这样的错误。
+
+  <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/93ab6b0186034787a9acb06b5e07db42~tplv-k3u1fbpfcp-zoom-1.image" alt="">
+
+</p>
+<h2 id="增强的for循环">增强的for循环</h2>
+<p>增强的for循环在我们的日常书写中是十分常见的写法，当我们不关心list当中的序列而只是依次迭代遍历对象的时候，就会使用这种写法。当然这只是JVM层面将其包装成固定的写法罢了，在具体的解释上，依旧还是依据迭代器的流程。<!-- raw HTML omitted -->
+例如这样一段简单的代码:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">List<span style="color:#ff79c6">&lt;</span>Integer<span style="color:#ff79c6">&gt;</span> list <span style="color:#ff79c6">=</span> Lists<span style="color:#ff79c6">.</span><span style="color:#50fa7b">newArrayList</span><span style="color:#ff79c6">(</span>1<span style="color:#ff79c6">,</span>2<span style="color:#ff79c6">,</span>3<span style="color:#ff79c6">);</span>
+<span style="color:#ff79c6">for</span> <span style="color:#ff79c6">(</span>Integer i <span style="color:#ff79c6">:</span> list<span style="color:#ff79c6">)</span> <span style="color:#ff79c6">{</span>
+    System<span style="color:#ff79c6">.</span><span style="color:#50fa7b">out</span><span style="color:#ff79c6">.</span><span style="color:#50fa7b">println</span><span style="color:#ff79c6">(</span>i<span style="color:#ff79c6">);</span>
+<span style="color:#ff79c6">}</span>
+</code></pre></div><p>通过javap的解释之后，截取部分图片
+
+  <img src="https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/14d582e3fa634189a7530a1f6c2160ab~tplv-k3u1fbpfcp-zoom-1.image" alt="">
+
+
+可以看到，这里还是使用迭代器的写法去进行遍历，通过next()方法获取到对象。</p>
+<h2 id="继续回归主线">继续回归主线</h2>
+<p>但是为什么要讲述上面这些东西呢？
+
+  <img src="https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/797b06742cd245a4a24ca307bb39411a~tplv-k3u1fbpfcp-zoom-1.image" alt="">
+
+
+我们来看下报错这边的信息，可以看到最后一行的堆栈是停留在</p>
+<pre><code>Exception in thread &quot;main&quot; java.util.NoSuchElementException
+	at java.util.AbstractList$Itr.next(AbstractList.java:364)
+	at com.example.demo.consume.CommonDoPartition.partitionToQuery4Map(CommonDoPartition.java:67)
+	at com.example.demo.consume.CommonDoPartition.main(CommonDoPartition.java:78)
+</code></pre><p>看看AbstractList的364行
+
+  <img src="https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/e50f2199aad747768c8eed83158b2c76~tplv-k3u1fbpfcp-zoom-1.image" alt="">
+
+
+可以看到，这里是因为报了IndexOutOfBoundsException的异常，然后抛出了NoSuchElementException异常。不同于常见的NoSuchElementException异常错误（示例1的代码），这里是使用了内部类当中的next()方法。<!-- raw HTML omitted -->
+那么既然会报错这个错误，问题就在于这里面的get方法。这里的get方法是一个抽象类</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">    <span style="color:#6272a4">/**
+</span><span style="color:#6272a4">     * {@inheritDoc}
+</span><span style="color:#6272a4">     *
+</span><span style="color:#6272a4">     * @throws IndexOutOfBoundsException {@inheritDoc}
+</span><span style="color:#6272a4">     */</span>
+    <span style="color:#8be9fd;font-style:italic">abstract</span> <span style="color:#8be9fd;font-style:italic">public</span> E <span style="color:#50fa7b">get</span><span style="color:#ff79c6">(</span><span style="color:#8be9fd">int</span> index<span style="color:#ff79c6">);</span>
+</code></pre></div><p>那么我们可以使用IDEA的Diagrams功能可以看一下继承关系
+
+  <img src="https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/5e1eef6d9a10414bba526ccda656d3f3~tplv-k3u1fbpfcp-zoom-1.image" alt="">
+
+
+看一下get的实现</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">    @Override <span style="color:#8be9fd;font-style:italic">public</span> List<span style="color:#ff79c6">&lt;</span>T<span style="color:#ff79c6">&gt;</span> <span style="color:#50fa7b">get</span><span style="color:#ff79c6">(</span><span style="color:#8be9fd">int</span> index<span style="color:#ff79c6">)</span> <span style="color:#ff79c6">{</span>
+      checkElementIndex<span style="color:#ff79c6">(</span>index<span style="color:#ff79c6">,</span> size<span style="color:#ff79c6">());</span><span style="color:#6272a4">// 进行安全检查
+</span><span style="color:#6272a4"></span>      <span style="color:#8be9fd">int</span> start <span style="color:#ff79c6">=</span> index <span style="color:#ff79c6">*</span> size<span style="color:#ff79c6">;</span>
+      <span style="color:#8be9fd">int</span> end <span style="color:#ff79c6">=</span> Math<span style="color:#ff79c6">.</span><span style="color:#50fa7b">min</span><span style="color:#ff79c6">(</span>start <span style="color:#ff79c6">+</span> size<span style="color:#ff79c6">,</span> list<span style="color:#ff79c6">.</span><span style="color:#50fa7b">size</span><span style="color:#ff79c6">());</span>
+      <span style="color:#ff79c6">return</span> list<span style="color:#ff79c6">.</span><span style="color:#50fa7b">subList</span><span style="color:#ff79c6">(</span>start<span style="color:#ff79c6">,</span> end<span style="color:#ff79c6">);</span><span style="color:#6272a4">// 通过subList进行部分数据的截取
+</span><span style="color:#6272a4"></span>    <span style="color:#ff79c6">}</span>
+    
+    <span style="color:#6272a4">// 获取size大小，这里其实是向上取整
+</span><span style="color:#6272a4"></span>    @Override <span style="color:#8be9fd;font-style:italic">public</span> <span style="color:#8be9fd">int</span> <span style="color:#50fa7b">size</span><span style="color:#ff79c6">()</span> <span style="color:#ff79c6">{</span>
+      <span style="color:#ff79c6">return</span> IntMath<span style="color:#ff79c6">.</span><span style="color:#50fa7b">divide</span><span style="color:#ff79c6">(</span>list<span style="color:#ff79c6">.</span><span style="color:#50fa7b">size</span><span style="color:#ff79c6">(),</span> size<span style="color:#ff79c6">,</span> RoundingMode<span style="color:#ff79c6">.</span><span style="color:#50fa7b">CEILING</span><span style="color:#ff79c6">);</span>
+    <span style="color:#ff79c6">}</span>
+</code></pre></div><p>那么造成IndexOutOfBoundsException异常也是由于checkElementIndex这个方法抛出来的</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">  <span style="color:#8be9fd;font-style:italic">public</span> <span style="color:#8be9fd;font-style:italic">static</span> <span style="color:#8be9fd">int</span> <span style="color:#50fa7b">checkElementIndex</span><span style="color:#ff79c6">(</span>
+      <span style="color:#8be9fd">int</span> index<span style="color:#ff79c6">,</span> <span style="color:#8be9fd">int</span> size<span style="color:#ff79c6">,</span> @Nullable String desc<span style="color:#ff79c6">)</span> <span style="color:#ff79c6">{</span>
+    <span style="color:#6272a4">// Carefully optimized for execution by hotspot (explanatory comment above)
+</span><span style="color:#6272a4"></span>    <span style="color:#ff79c6">if</span> <span style="color:#ff79c6">(</span>index <span style="color:#ff79c6">&lt;</span> 0 <span style="color:#ff79c6">||</span> index <span style="color:#ff79c6">&gt;=</span> size<span style="color:#ff79c6">)</span> <span style="color:#ff79c6">{</span>
+      <span style="color:#ff79c6">throw</span> <span style="color:#ff79c6">new</span> IndexOutOfBoundsException<span style="color:#ff79c6">(</span>badElementIndex<span style="color:#ff79c6">(</span>index<span style="color:#ff79c6">,</span> size<span style="color:#ff79c6">,</span> desc<span style="color:#ff79c6">));</span>
+    <span style="color:#ff79c6">}</span>
+    <span style="color:#ff79c6">return</span> index<span style="color:#ff79c6">;</span>
+  <span style="color:#ff79c6">}</span>
+</code></pre></div><p>看到这里是不是就突然明白了！Guava当中Partition的做法是通过一整个list的数据截取，其实也是一种分页的处理方式。那么倘若在后续的业务代码中对这一整个数据进行了删减，那么这里的size()的取值就不准了,造成整个get的数据就不符预测值了。<!-- raw HTML omitted --></p>
+<h2 id="总结">总结</h2>
+<p>那么现在我们来总结一下这里的流程: <!-- raw HTML omitted --></p>
+<ol>
+<li>增强的for循环会解释成hasNext()和next()进行迭代遍历；</li>
+<li>next()当中的get()方法其实是进行list元素列表的数据截取，可理解为分页；</li>
+<li>get()方法会进行数组越界判断，当list数据删减的时候，size()方法的返回值不是固定值。</li>
+<li>每一次迭代都会将游标cursor进行+1，当list数据删减的时候，调用get()进行数组越界判断就会发生IndexOutOfBoundsException异常，继而在next()方法当中抛出NoSuchElementException异常。
+
+  <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/5434f16702974fee88a5f37ade513984~tplv-k3u1fbpfcp-zoom-1.image" alt="">
+
+</li>
+</ol>
+<h2 id="解决">解决</h2>
+<p>解决的思路无非是两点:</p>
+<ol>
+<li>控制业务调用层面禁止对原数据列表的删除。（但是由于业务场景的复杂性，这点比较难以控制，所以不太推荐)</li>
+<li>在这种场景下不再使用Guava的Partition，自己改写一份数据分隔的工具类。
+<!-- raw HTML omitted -->
+可以发现，Guava的数据自始至终只有一份，也没有对原数据进行保护，就会造成下游业务对源数据进行破坏。那么也给了我们一个思路，那就是需要为原数据留下一个备份。所以我自己又写了一个工具类</li>
+</ol>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#ff79c6">import</span> java.util.*<span style="color:#ff79c6">;</span>
+
+<span style="color:#8be9fd;font-style:italic">public</span> <span style="color:#8be9fd;font-style:italic">class</span> <span style="color:#50fa7b">SubListIterator</span><span style="color:#ff79c6">&lt;</span>T<span style="color:#ff79c6">&gt;</span> <span style="color:#8be9fd;font-style:italic">implements</span> Iterator <span style="color:#ff79c6">{</span>
+
+    <span style="color:#6272a4">/**
+</span><span style="color:#6272a4">     * 原数据列表
+</span><span style="color:#6272a4">     */</span>
+    <span style="color:#8be9fd;font-style:italic">private</span> List<span style="color:#ff79c6">&lt;</span>T<span style="color:#ff79c6">&gt;</span> dataList<span style="color:#ff79c6">;</span>
+
+    <span style="color:#6272a4">/**
+</span><span style="color:#6272a4">     * 分隔单位
+</span><span style="color:#6272a4">     */</span>
+    <span style="color:#8be9fd;font-style:italic">private</span> <span style="color:#8be9fd">int</span> subSize<span style="color:#ff79c6">;</span>
+
+    <span style="color:#8be9fd;font-style:italic">private</span> <span style="color:#8be9fd;font-style:italic">volatile</span> <span style="color:#8be9fd">int</span> nextIndex <span style="color:#ff79c6">=</span> 0<span style="color:#ff79c6">;</span>
+
+    <span style="color:#8be9fd;font-style:italic">private</span> <span style="color:#8be9fd">int</span> listSize<span style="color:#ff79c6">;</span>
+
+    <span style="color:#8be9fd;font-style:italic">private</span> List<span style="color:#ff79c6">&lt;</span>List<span style="color:#ff79c6">&lt;</span>T<span style="color:#ff79c6">&gt;&gt;</span> subLists <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">new</span> ArrayList<span style="color:#ff79c6">&lt;&gt;();</span>
+
+    <span style="color:#8be9fd;font-style:italic">public</span> <span style="color:#50fa7b">SubListIterator</span><span style="color:#ff79c6">(</span>List<span style="color:#ff79c6">&lt;</span>T<span style="color:#ff79c6">&gt;</span> dataList<span style="color:#ff79c6">,</span> <span style="color:#8be9fd">int</span> subSize<span style="color:#ff79c6">){</span>
+        <span style="color:#ff79c6">if</span><span style="color:#ff79c6">(</span>dataList <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">null</span><span style="color:#ff79c6">){</span>
+            listSize <span style="color:#ff79c6">=</span> dataList<span style="color:#ff79c6">.</span><span style="color:#50fa7b">size</span><span style="color:#ff79c6">();</span>
+        <span style="color:#ff79c6">}</span>
+
+        <span style="color:#ff79c6">this</span><span style="color:#ff79c6">.</span><span style="color:#50fa7b">dataList</span> <span style="color:#ff79c6">=</span> dataList<span style="color:#ff79c6">;</span>
+        <span style="color:#ff79c6">this</span><span style="color:#ff79c6">.</span><span style="color:#50fa7b">subSize</span> <span style="color:#ff79c6">=</span> subSize<span style="color:#ff79c6">;</span>
+
+        initSubLists<span style="color:#ff79c6">();</span>
+    <span style="color:#ff79c6">}</span>
+
+    <span style="color:#8be9fd;font-style:italic">private</span> <span style="color:#8be9fd">void</span> <span style="color:#50fa7b">initSubLists</span><span style="color:#ff79c6">(){</span>
+        <span style="color:#ff79c6">if</span><span style="color:#ff79c6">(</span>listSize <span style="color:#ff79c6">&lt;=</span> 0<span style="color:#ff79c6">){</span>
+            <span style="color:#ff79c6">return</span><span style="color:#ff79c6">;</span>
+        <span style="color:#ff79c6">}</span>
+
+        <span style="color:#8be9fd">int</span> index <span style="color:#ff79c6">=</span> 1<span style="color:#ff79c6">;</span>
+
+        Iterator<span style="color:#ff79c6">&lt;</span>T<span style="color:#ff79c6">&gt;</span> iterator <span style="color:#ff79c6">=</span> dataList<span style="color:#ff79c6">.</span><span style="color:#50fa7b">iterator</span><span style="color:#ff79c6">();</span>
+
+        List<span style="color:#ff79c6">&lt;</span>T<span style="color:#ff79c6">&gt;</span> subDataList <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">new</span> ArrayList<span style="color:#ff79c6">();</span>
+        <span style="color:#ff79c6">while</span><span style="color:#ff79c6">(</span>iterator<span style="color:#ff79c6">.</span><span style="color:#50fa7b">hasNext</span><span style="color:#ff79c6">()){</span>
+            T next <span style="color:#ff79c6">=</span> iterator<span style="color:#ff79c6">.</span><span style="color:#50fa7b">next</span><span style="color:#ff79c6">();</span>
+
+            subDataList<span style="color:#ff79c6">.</span><span style="color:#50fa7b">add</span><span style="color:#ff79c6">(</span>next<span style="color:#ff79c6">);</span>
+            <span style="color:#ff79c6">if</span> <span style="color:#ff79c6">(</span>index <span style="color:#ff79c6">%</span> subSize <span style="color:#ff79c6">==</span> 0 <span style="color:#ff79c6">||</span> listSize <span style="color:#ff79c6">==</span> index<span style="color:#ff79c6">)</span> <span style="color:#ff79c6">{</span>
+                subLists<span style="color:#ff79c6">.</span><span style="color:#50fa7b">add</span><span style="color:#ff79c6">(</span>subDataList<span style="color:#ff79c6">);</span>
+                subDataList <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">new</span> ArrayList<span style="color:#ff79c6">();</span>
+            <span style="color:#ff79c6">}</span>
+            index<span style="color:#ff79c6">++;</span>
+        <span style="color:#ff79c6">}</span>
+    <span style="color:#ff79c6">}</span>
+
+
+    @Override
+    <span style="color:#8be9fd;font-style:italic">public</span> <span style="color:#8be9fd">boolean</span> <span style="color:#50fa7b">hasNext</span><span style="color:#ff79c6">()</span> <span style="color:#ff79c6">{</span>
+        <span style="color:#ff79c6">return</span> subLists<span style="color:#ff79c6">.</span><span style="color:#50fa7b">size</span><span style="color:#ff79c6">()</span> <span style="color:#ff79c6">&gt;</span> nextIndex<span style="color:#ff79c6">;</span>
+    <span style="color:#ff79c6">}</span>
+
+    @Override
+    <span style="color:#8be9fd;font-style:italic">public</span> Object <span style="color:#50fa7b">next</span><span style="color:#ff79c6">()</span> <span style="color:#ff79c6">{</span>
+        <span style="color:#ff79c6">if</span><span style="color:#ff79c6">(</span>hasNext<span style="color:#ff79c6">())</span> <span style="color:#ff79c6">{</span>
+            <span style="color:#ff79c6">return</span> subLists<span style="color:#ff79c6">.</span><span style="color:#50fa7b">get</span><span style="color:#ff79c6">(</span>nextIndex<span style="color:#ff79c6">++);</span>
+        <span style="color:#ff79c6">}</span>
+
+        <span style="color:#ff79c6">return</span> <span style="color:#ff79c6">null</span><span style="color:#ff79c6">;</span>
+    <span style="color:#ff79c6">}</span>
+
+    @Override
+    <span style="color:#8be9fd;font-style:italic">public</span> <span style="color:#8be9fd">void</span> <span style="color:#50fa7b">remove</span><span style="color:#ff79c6">()</span> <span style="color:#ff79c6">{</span>
+        <span style="color:#ff79c6">new</span> UnsupportedOperationException<span style="color:#ff79c6">(</span><span style="color:#f1fa8c">&#34;不支持该操作&#34;</span><span style="color:#ff79c6">);</span>
+    <span style="color:#ff79c6">}</span>
+
+<span style="color:#ff79c6">}</span>
+
+</code></pre></div><p>这里也附上我的Github地址:https://github.com/showyool/juejin.git</p>
+<h2 id="最后">最后</h2>
+<p>感谢各位能够看到这里，以上就是我处理这个bug的全部过程。今后还会继续分享我所发现的bug以及知识点，如果我的文章对你有所帮助，还希望各位大佬$\color{red}{点个关注}$$\color{red}{点个赞}$，再次感谢大家的支持！<!-- raw HTML omitted --></p>
+
+
+                
+                
+<div class="entry-shang text-center">
+    
+	    <p> 「如果这篇文章对你有用,请随意打赏」</p>
+	
+	<button class="zs show-zs btn btn-bred">赞赏支持</button>
+</div>
+<div class="zs-modal-bg"></div>
+<div class="zs-modal-box">
+	<div class="zs-modal-head">
+		<button type="button" class="close">×</button>
+		<span class="author"><a href="http://username.github.io/"><img src="/img/favicon.png" />showyool个人博客</a></span>
+        
+	        <p class="tip"><i></i><span>如果这篇文章对你有用,请随意打赏</span></p>
+		
+ 
+	</div>
+	<div class="zs-modal-body">
+		<div class="zs-modal-btns">
+			<button class="btn btn-blink" data-num="2">2元</button>
+			<button class="btn btn-blink" data-num="5">5元</button>
+			<button class="btn btn-blink" data-num="10">10元</button>
+			<button class="btn btn-blink" data-num="50">50元</button>
+			<button class="btn btn-blink" data-num="100">100元</button>
+			<button class="btn btn-blink" data-num="1">任意金额</button>
+		</div>
+		<div class="zs-modal-pay">
+			<button class="btn btn-bred" id="pay-text">2元</button>
+			<p>使用<span id="pay-type">微信</span>扫描二维码完成支付</p>
+			<img src="/img/reward/wechat-2.png"  id="pay-image"/>
+		</div>
+	</div>
+	<div class="zs-modal-footer">
+		<label><input type="radio" name="zs-type" value="wechat" class="zs-type" checked="checked"><span ><span class="zs-wechat"><img src="/img/reward/wechat-btn.png"/></span></label>
+		<label><input type="radio" name="zs-type" value="alipay" class="zs-type" class="zs-alipay"><img src="/img/reward/alipay-btn.png"/></span></label>
+	</div>
+</div>
+<script type="text/javascript" src="/js/reward.js"></script>
+
+                
+
+                <hr>
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/post/6875124241813995533/" data-toggle="tooltip" data-placement="top" title="这可能是你从未见过如此优雅的写法">&larr;
+                            Previous Post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/post/6885187698420613127/" data-toggle="tooltip" data-placement="top" title="一次i&#43;&#43;引发的bug">Next
+                            Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                
+<div id="disqus-comment"></div>
+
+
+
+            </div>
+            
+            <div class="
+                col-lg-11 col-lg-offset-1
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                
+                
+                <section>
+                    <hr class="hidden-sm hidden-xs">
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                        
+                        
+                        
+                        
+                    </div>
+                </section>
+                
+
+                
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                   
+                   <li>
+                       <a href='' rel="alternate" type="application/rss+xml" title="showyool个人博客" >
+                           <span class="fa-stack fa-lg">
+                               <i class="fa fa-circle fa-stack-2x"></i>
+                               <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+                           </span>
+                       </a>
+                   </li>
+                   
+                    
+                    <li>
+                        <a href="mailto:mengyirunian@outlook.com">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		    
+                    
+                    
+                    
+                    
+
+                    
+
+		    
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://github.com/showyool">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+            
+            
+            
+                </ul>
+		<p class="copyright text-muted">
+                    Copyright &copy; showyool个人博客 2020
+                    <br>
+                    <a href="https://themes.gohugo.io/hugo-theme-cleanwhite">CleanWhite Hugo Theme</a> by <a href="https://zhaohuabing.com">Huabing</a> |
+                    <iframe
+                        style="margin-left: 2px; margin-bottom:-5px;"
+                        frameborder="0" scrolling="0" width="100px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=zhaohuabing&repo=hugo-theme-cleanwhite&type=star&count=true" >
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+
+
+
+
+
+<script>
+    
+    if($('#tag_cloud').length !== 0){
+        async("/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+
+<script>
+    async("https://cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+
+
+
+
+</body>
+</html>
