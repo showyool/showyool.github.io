@@ -6,10 +6,19 @@
     <description>Recent content on Showyool个人博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Wed, 11 Nov 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 08 Feb 2021 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="http://showyool.github.io/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>【硬核】由XSS问题探索一下SpringMVC和FastJson</title>
+      <link>http://showyool.github.io/post/6926911342242693134/</link>
+      <pubDate>Mon, 08 Feb 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://showyool.github.io/post/6926911342242693134/</guid>
+      <description>前言 好久没来写文章了，所以在某人的催促之下，把最近的一个需求进行总结一下。在这个需求的开发过程中，还是有不少收获的，所以做一下分享，如有补充</description>
+    </item>
     
     <item>
       <title>记一次微服务项目迁移拆分的过程</title>
